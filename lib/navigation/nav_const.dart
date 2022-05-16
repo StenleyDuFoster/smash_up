@@ -21,4 +21,16 @@ extension ScreenExt on Screen {
         return CreateGameScreen();
     }
   }
+  String get name {
+    switch (this) {
+      case Screen.Start:
+        return "Start";
+      case Screen.ViewFraction:
+        return "ViewFraction";
+      case Screen.CreatedFraction:
+        return "CreatedFraction";
+      case Screen.CreateGame:
+        return "CreateGame";
+    }
+  }
 }

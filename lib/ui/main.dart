@@ -3,6 +3,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:smash_up/ui/start_screen/start_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../navigation/nav_const.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -27,6 +29,12 @@ class MyApp extends StatelessWidget {
         Locale('en', ''),
       ],
       home: StartScreen(),
+      routes: {
+        Screen.Start.name: (BuildContext context) => Screen.Start.screen,
+        Screen.CreateGame.name: (BuildContext context) => Screen.CreateGame.screen,
+        Screen.CreatedFraction.name: (BuildContext context) => Screen.CreatedFraction.screen,
+        Screen.ViewFraction.name: (BuildContext context) => Screen.ViewFraction.screen,
+      },
     );
   }
 }
