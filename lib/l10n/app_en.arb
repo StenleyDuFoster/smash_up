@@ -1,7 +1,8 @@
 {
-    "helloWorld": "Hello World!",
-    "watch_fraction": "Watch Fraction",
-    "create_game": "Create Game",
-    "log_in": "Log in"
-
+  "watch_fraction": "Watch Fraction",
+  "create_game": "Create Game",
+  "log_in": "Log in",
+  "add_fraction": "Add Fraction",
+  "in_develop": "In develop",
+  "filter_by_dlc": "Filter by dlc"
 }

@@ -1,0 +1,561 @@
+[
+  {
+    "name": "Aliens",
+    "name_ua": "Інопланетяни",
+    "asset_image": "aliens_0.webp",
+    "set": "Core Set"
+  },
+  {
+    "name": "Dinosaurs",
+    "name_ua": "Динозаври",
+    "asset_image": "dinosaurs_0.webp",
+    "set": "Core Set"
+  },
+  {
+    "name": "Ninjas",
+    "name_ua": "Ніндзя",
+    "asset_image": "ninjas_0.webp",
+    "set": "Core Set"
+  },
+  {
+    "name": "Pirates",
+    "name_ua": "Пірати",
+    "asset_image": "pirates_0.webp",
+    "set": "Core Set"
+  },
+  {
+    "name": "Robots",
+    "name_ua": "Роботи",
+    "asset_image": "robots_0.webp",
+    "set": "Core Set"
+  },
+  {
+    "name": "Tricksters",
+    "name_ua": "Лепрекони",
+    "asset_image": "tricksters_0.webp",
+    "set": "Core Set"
+  },
+  {
+    "name": "Wizards",
+    "name_ua": "Чарівники",
+    "asset_image": "wizards_0.webp",
+    "set": "Core Set"
+  },
+  {
+    "name": "Zombies",
+    "name_ua": "Зомбі",
+    "asset_image": "zombies_0.webp",
+    "set": "Core Set"
+  },
+  {
+    "name": "Bear Cavalrybies",
+    "name_ua": "Ведмежі кавалерії",
+    "asset_image": "bear_cavalry_0.webp",
+    "set": "Awesome Level 9000"
+  },
+  {
+    "name": "Ghosts",
+    "name_ua": "Привиди",
+    "asset_image": "ghosts_0.webp",
+    "set": "Awesome Level 9000"
+  },
+  {
+    "name": "Killer Plants",
+    "name_ua": "Рослини-вбивці",
+    "asset_image": "killer_plants_0.webp",
+    "set": "Awesome Level 9000"
+  },
+  {
+    "name": "Steampunks",
+    "name_ua": "Стімпанки",
+    "asset_image": "steampunk_0.webp",
+    "set": "Awesome Level 9000"
+  },
+  {
+    "name": "Elder Things",
+    "name_ua": "Старші речі",
+    "asset_image": "elder_things_0.webp",
+    "set": "The Obligatory Cthulhu Set"
+  },
+  {
+    "name": "Innsmouth",
+    "name_ua": "Інсмут",
+    "asset_image": "innsmouth_0.webp",
+    "set": "The Obligatory Cthulhu Set"
+  },
+  {
+    "name": "Minions of Cthulhu",
+    "name_ua": "Міньйони Ктулху",
+    "asset_image": "minions_of_cthulhu_0.webp",
+    "set": "The Obligatory Cthulhu Set"
+  },
+  {
+    "name": "Miskatonic University",
+    "name_ua": "Міскатоніцький університет",
+    "asset_image": "miskatonic_university_0.webp",
+    "set": "The Obligatory Cthulhu Set"
+  },
+  {
+    "name": "Cyborg Apes",
+    "name_ua": "Мавпи-кіборги",
+    "asset_image": "cyborg_apes_0.webp",
+    "set": "Science Fiction Double Feature"
+  },
+  {
+    "name": "Shapeshifters",
+    "name_ua": "Обмінники",
+    "asset_image": "shapeshifters_0.webp",
+    "set": "Science Fiction Double Feature"
+  },
+  {
+    "name": "Super Spies",
+    "name_ua": "Супер шпигуни",
+    "asset_image": "super_spies_0.webp",
+    "set": "Science Fiction Double Feature"
+  },
+  {
+    "name": "Time Travelers",
+    "name_ua": "Мандрівники в часі",
+    "asset_image": "time_travelers_0.webp",
+    "set": "Science Fiction Double Feature"
+  },
+  {
+    "name": "Giant Ants",
+    "name_ua": "Гігантські мурахи",
+    "asset_image": "giant_ants_0.webp",
+    "set": "Monster Smash"
+  },
+  {
+    "name": "Mad Scientists",
+    "name_ua": "Божевільні вчені",
+    "asset_image": "mad_scientists_0.webp",
+    "set": "Monster Smash"
+  },
+  {
+    "name": "Vampires",
+    "name_ua": "Вампіри",
+    "asset_image": "vampires_0.webp",
+    "set": "Monster Smash"
+  },
+  {
+    "name": "Werewolves",
+    "name_ua": "Перевертні",
+    "asset_image": "werewolves_0.webp",
+    "set": "Monster Smash"
+  },
+  {
+    "name": "Fairies",
+    "name_ua": "Феї",
+    "asset_image": "fairies_0.webp",
+    "set": "Pretty Pretty Smash Up"
+  },
+  {
+    "name": "Kitty Cats",
+    "name_ua": "Кітті Котики",
+    "asset_image": "kitty_cats_0.webp",
+    "set": "Pretty Pretty Smash Up"
+  },
+  {
+    "name": "Mythic Horses",
+    "name_ua": "Міфічні коні",
+    "asset_image": "mythic_horses_0.webp",
+    "set": "Pretty Pretty Smash Up"
+  },
+  {
+    "name": "Princesses",
+    "name_ua": "Принцеси",
+    "asset_image": "princesses_0.webp",
+    "set": "Pretty Pretty Smash Up"
+  },
+  {
+    "name": "Clerics",
+    "name_ua": "Священнослужителі",
+    "asset_image": "сlerics_0.webp",
+    "set": "Smash Up: Munchkin"
+  },
+  {
+    "name": "Dwarves",
+    "name_ua": "Гноми",
+    "asset_image": "dwarves_0.webp",
+    "set": "Smash Up: Munchkin"
+  },
+  {
+    "name": "Elves",
+    "name_ua": "Ельфи",
+    "asset_image": "elves_0.webp",
+    "set": "Smash Up: Munchkin"
+  },
+  {
+    "name": "Halflings",
+    "name_ua": "Напіврослини",
+    "asset_image": "halflings_0.webp",
+    "set": "Smash Up: Munchkin"
+  },
+  {
+    "name": "Mages",
+    "name_ua": "Маги",
+    "asset_image": "mages_0.webp",
+    "set": "Smash Up: Munchkin"
+  },
+  {
+    "name": "Orcs",
+    "name_ua": "Орки",
+    "asset_image": "orcs_0.webp",
+    "set": "Smash Up: Munchkin"
+  },
+  {
+    "name": "Thieves",
+    "name_ua": "Злодії",
+    "asset_image": "thieves_0.webp",
+    "set": "Smash Up: Munchkin"
+  },
+  {
+    "name": "Warriors",
+    "name_ua": "Воїни",
+    "asset_image": "warriors_0.webp",
+    "set": "Smash Up: Munchkin"
+  },
+  {
+    "name": "Dragons",
+    "name_ua": "Дракони",
+    "asset_image": "dragons_0.webp",
+    "set": "It’s Your Fault!"
+  },
+  {
+    "name": "Mythic Greeks",
+    "name_ua": "Міфічні греки",
+    "asset_image": "mythic_greeks_0.webp",
+    "set": "It’s Your Fault!"
+  },
+  {
+    "name": "Sharks",
+    "name_ua": "Акули",
+    "asset_image": "sharks_0.webp",
+    "set": "It’s Your Fault!"
+  },
+  {
+    "name": "Superheroes",
+    "name_ua": "Супергерої",
+    "asset_image": "superheroes_0.webp",
+    "set": "It’s Your Fault!"
+  },
+  {
+    "name": "Tornados",
+    "name_ua": "Торнадо",
+    "asset_image": "tornados_0.webp",
+    "set": "It’s Your Fault!"
+  },
+  {
+    "name": "Astroknights",
+    "name_ua": "Астро Лицарі",
+    "asset_image": "astro_knights_0.webp",
+    "set": "Cease and Desist"
+  },
+  {
+    "name": "Changerbots",
+    "name_ua": "Боти-чейнджери",
+    "asset_image": "changerbots_0.webp",
+    "set": "Cease and Desist"
+  },
+  {
+    "name": "Ignobles",
+    "name_ua": "Неблагородні",
+    "asset_image": "ignobles_0.webp",
+    "set": "Cease and Desist"
+  },
+  {
+    "name": "Star Roamers",
+    "name_ua": "Зоряні мандрівники",
+    "asset_image": "star_roamers_0.webp",
+    "set": "Cease and Desist"
+  },
+  {
+    "name": "Explorers",
+    "name_ua": "Дослідники",
+    "asset_image": "explorers_0.webp",
+    "set": "What Were We Thinking?"
+  },
+  {
+    "name": "Grannies",
+    "name_ua": "бабусі",
+    "asset_image": "grannies_0.webp",
+    "set": "What Were We Thinking?"
+  },
+  {
+    "name": "Rock Stars",
+    "name_ua": "Рок-зірки",
+    "asset_image": "rock_stars_0.webp",
+    "set": "What Were We Thinking?"
+  },
+  {
+    "name": "Teddy Bears",
+    "name_ua": "Плюшеві ведмедики",
+    "asset_image": "teddy_bear_0.webp",
+    "set": "What Were We Thinking?"
+  },
+  {
+    "name": "Itty Critters",
+    "name_ua": "Ітті Криттерс",
+    "asset_image": "itty_critters_0.webp",
+    "set": "Big in Japan"
+  },
+  {
+    "name": "Kaiju",
+    "name_ua": "Кайдзю",
+    "asset_image": "kaiju_0.webp",
+    "set": "Big in Japan"
+  },
+  {
+    "name": "Magical Girls",
+    "name_ua": "Чарівні дівчата",
+    "asset_image": "magical_girls_0.webp",
+    "set": "Big in Japan"
+  },
+  {
+    "name": "Mega Troopers",
+    "name_ua": "Мегадесантники",
+    "asset_image": "mega_troopers_0.webp",
+    "set": "Big in Japan"
+  },
+  {
+    "name": "Disco Dancers",
+    "name_ua": "Танцюристи дискотеки",
+    "asset_image": "disco_0.webp",
+    "set": "That ’70s Expansion"
+  },
+  {
+    "name": "Kung Fu Fighters",
+    "name_ua": "Бійці кунг-фу",
+    "asset_image": "kung_fu_0.webp",
+    "set": "That ’70s Expansion"
+  },
+  {
+    "name": "Truckers",
+    "name_ua": "Далекобійники",
+    "asset_image": "trucker_0.webp",
+    "set": "That ’70s Expansion"
+  },
+  {
+    "name": "Vigilantes",
+    "name_ua": "Пильники",
+    "asset_image": "vigilante_0.webp",
+    "set": "That ’70s Expansion"
+  },
+  {
+    "name": "Geeks",
+    "name_ua": "Виродки",
+    "asset_image": "geeks_0.webp",
+    "set": "The Bigger Geekier Box"
+  },
+  {
+    "name": "Smash Up All Stars",
+    "name_ua": "Розбийте всі зірки",
+    "asset_image": "smash_up_all_stars_logo_0.webp",
+    "set": "The Bigger Geekier Box"
+  },
+  {
+    "name": "Ancient Egyptians",
+    "name_ua": "Стародавні єгиптяни",
+    "asset_image": "ancient_egyptians_logo_0.webp",
+    "set": "Oops, You Did It Again"
+  },
+  {
+    "name": "Cowboys",
+    "name_ua": "Ковбої",
+    "asset_image": "cowboys_logo_0.webp",
+    "set": "Oops, You Did It Again"
+  },
+  {
+    "name": "Samurai",
+    "name_ua": "самурай",
+    "asset_image": "samurai_logo_0.webp",
+    "set": "Oops, You Did It Again"
+  },
+  {
+    "name": "Vikings",
+    "name_ua": "Вікінги",
+    "asset_image": "vikings_logo_0.webp",
+    "set": "Oops, You Did It Again"
+  },
+  {
+    "name": "Luchadors",
+    "name_ua": "Лучадори",
+    "asset_image": "luchadors_logo_0.webp",
+    "set": "World Tour: International Incident"
+  },
+  {
+    "name": "Mounties",
+    "name_ua": "Маунти",
+    "asset_image": "mounties_logo_0.webp",
+    "set": "World Tour: International Incident"
+  },
+  {
+    "name": "Musketeers",
+    "name_ua": "Мушкетери",
+    "asset_image": "musketeers_logo_0.webp",
+    "set": "World Tour: International Incident"
+  },
+  {
+    "name": "Sumo Wrestlers",
+    "name_ua": "Борці сумо",
+    "asset_image": "sumo_wrestlers_logo_0.webp",
+    "set": "World Tour: International Incident"
+  },
+  {
+    "name": "Penguins",
+    "name_ua": "Пінгвіни",
+    "asset_image": "penguins_logo_0.webp",
+    "set": "Smash Up Penguins"
+  },
+  {
+    "name": "Anansi Tales",
+    "name_ua": "Казки Анансі",
+    "asset_image": "anansi_tales_logo_0.webp",
+    "set": "World Tour: Culture Shock"
+  },
+  {
+    "name": "Ancient Incas",
+    "name_ua": "Стародавні інки",
+    "asset_image": "ancient_incas_logo_0.webp",
+    "set": "World Tour: Culture Shock"
+  },
+  {
+    "name": "Grimms’ Fairy Tales",
+    "name_ua": "Казки Гріммса",
+    "asset_image": "grimms_fairy_tales_logo_0.webp",
+    "set": "World Tour: Culture Shock"
+  },
+  {
+    "name": "Polynesian Voyagers",
+    "name_ua": "Полінезійські подорожі",
+    "asset_image": "polynesian_voyagers_logo_0.webp",
+    "set": "World Tour: Culture Shock"
+  },
+  {
+    "name": "Russian Fairy Tales",
+    "name_ua": "Російські казки",
+    "asset_image": "russian_fairy_tales_logo_0.webp",
+    "set": "World Tour: Culture Shock"
+  },
+  {
+    "name": "Avengers",
+    "name_ua": "Месники",
+    "asset_image": "avengers_logo_0.webp",
+    "set": "Smash Up: Marvel"
+  },
+  {
+    "name": "Hydra",
+    "name_ua": "Гідра",
+    "asset_image": "hydra_logo_0.webp",
+    "set": "Smash Up: Marvel"
+  },
+  {
+    "name": "Kree",
+    "name_ua": "Кри",
+    "asset_image": "kree_icon_0.webp",
+    "set": "Smash Up: Marvel"
+  },
+  {
+    "name": "Masters of Evil",
+    "name_ua": "Майстри зла",
+    "asset_image": "masters_of_evil_logo_0.webp",
+    "set": "Smash Up: Marvel"
+  },
+  {
+    "name": "S.H.I.E.L.D.",
+    "name_ua": "ЩИТ",
+    "asset_image": "shield_icon_0.webp",
+    "set": "Smash Up: Marvel"
+  },
+  {
+    "name": "Sinister Six",
+    "name_ua": "Зловесна шість",
+    "asset_image": "sinister_six_icon_0.webp",
+    "set": "Smash Up: Marvel"
+  },
+  {
+    "name": "Spider-Verse",
+    "name_ua": "Павук-вірш",
+    "asset_image": "spider_verse_icon_0.webp",
+    "set": "Smash Up: Marvel"
+  },
+  {
+    "name": "Ultimates",
+    "name_ua": "Ультимативні",
+    "asset_image": "ultimates_icon_0.webp",
+    "set": "Smash Up: Marvel"
+  },
+  {
+    "name": "Goblins",
+    "name_ua": "Гобліни",
+    "asset_image": "goblins_logo_0.webp",
+    "set": "Smash Up Goblins"
+  },
+  {
+    "name": "Knights of the Round Table",
+    "name_ua": "Лицарі Круглого стола",
+    "asset_image": "knights_icon_0.webp",
+    "set": "Smash Up Knights of the Round Table"
+  },
+  {
+    "name": "Aladdin",
+    "name_ua": "Аладдін",
+    "set": "Smash Up: Disney Edition"
+  },
+  {
+    "name": "Beauty and the Beast",
+    "name_ua": "Красуня та Чудовисько",
+    "set": "Smash Up: Disney Edition"
+  },
+  {
+    "name": "Big Hero 6",
+    "name_ua": "Велика шістка",
+    "set": "Smash Up: Disney Edition"
+  },
+  {
+    "name": "Frozen",
+    "name_ua": "Заморожений",
+    "set": "Smash Up: Disney Edition"
+  },
+  {
+    "name": "Mulan",
+    "name_ua": "Мулан",
+    "set": "Smash Up: Disney Edition"
+  },
+  {
+    "name": "The Lion King",
+    "name_ua": "Король Лев",
+    "set": "Smash Up: Disney Edition"
+  },
+  {
+    "name": "The Nightmare Before Christmas",
+    "name_ua": "Кошмар перед Різдвом",
+    "set": "Smash Up: Disney Edition"
+  },
+  {
+    "name": "Wreck-It Ralph",
+    "name_ua": "Зламай це Ральф",
+    "set": "Smash Up: Disney Edition"
+  },
+  {
+    "name": "Mermaids",
+    "name_ua": "Русалки",
+    "set": "10th Anniversary"
+  },
+  {
+    "name": "Sheep",
+    "name_ua": "Вівці",
+    "asset_image": "sheep_Icon_0.webp",
+    "set": "10th Anniversary"
+  },
+  {
+    "name": "Skeletons",
+    "name_ua": "Скелети",
+    "set": "10th Anniversary"
+  },
+  {
+    "name": "World Champs",
+    "name_ua": "Чемпіони світу",
+    "set": "10th Anniversary"
+  }
+]

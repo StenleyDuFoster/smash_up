@@ -1,11 +1,16 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:smash_up/ui/start_screen/start_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:smash_up/ui/start_screen/start_screen.dart';
 
+import '../domain/db_model/fraction_db_model.dart';
+import '../firebase_options.dart';
 import '../navigation/nav_const.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -14,26 +19,47 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return FutureBuilder(
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          return _buildApp();
+        }
+        return Container(child: Center(child:CircularProgressIndicator.adaptive()),);
+      },
+      future: Future.wait([
+        Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform),
+        Hive.initFlutter().then((value) {
+          Hive.registerAdapter(FractionDbModelAdapter());
+        })
+      ]),
+    );
+  }
+
+  Widget _buildApp() {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      localizationsDelegates: [
+      localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate
       ],
-      supportedLocales: [
+      supportedLocales: const [
         Locale('en', ''),
+        // Locale('ua', ''),
       ],
       home: StartScreen(),
       routes: {
         Screen.Start.name: (BuildContext context) => Screen.Start.screen,
-        Screen.CreateGame.name: (BuildContext context) => Screen.CreateGame.screen,
-        Screen.CreatedFraction.name: (BuildContext context) => Screen.CreatedFraction.screen,
-        Screen.ViewFraction.name: (BuildContext context) => Screen.ViewFraction.screen,
+        Screen.CreateGame.name: (BuildContext context) =>
+            Screen.CreateGame.screen,
+        Screen.CreatedFraction.name: (BuildContext context) =>
+            Screen.CreatedFraction.screen,
+        Screen.ViewFraction.name: (BuildContext context) =>
+            Screen.ViewFraction.screen,
       },
     );
   }

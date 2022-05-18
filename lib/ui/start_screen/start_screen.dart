@@ -30,9 +30,27 @@ class _StartScreen extends BaseState<StartScreen> {
           image: AssetImage("assets/image/smash_up_small_logo.jpg"),
         ),
         Spacer(),
-        TextButton(
-            onPressed: () => {},
-            child: Text(AppLocalizations.of(context)?.log_in ?? "")),
+        Row(children: [
+          Padding(
+            padding: EdgeInsets.all(10),
+            child: InkWell(child: Padding(padding: EdgeInsets.all(10),
+            child: Text(Localizations.localeOf(context).languageCode)), onTap: () => {
+              AppLocalizations.of(context)
+            },),
+          ),
+          Expanded(
+            child: Container(
+              child: TextButton(
+                  onPressed: () => {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content:
+                      Text(AppLocalizations.of(context)?.in_develop ?? ""),
+                    ))
+                  },
+                  child: Text(AppLocalizations.of(context)?.log_in ?? "")),
+            ),
+          ),
+        ],),
         Padding(padding: EdgeInsets.all(5)),
       ]),
     );
