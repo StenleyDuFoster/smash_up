@@ -4,5 +4,7 @@
   "log_in": "Log in",
   "add_fraction": "Add Fraction",
   "in_develop": "In develop",
-  "filter_by_dlc": "Filter by dlc"
+  "filter_by_dlc": "Filter by dlc",
+  "select_dls": "Select DLC to filter",
+  "apply": "Apply"
 }

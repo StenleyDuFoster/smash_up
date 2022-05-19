@@ -7,12 +7,17 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smash_up/core/base_screen.dart';
 import 'package:smash_up/domain/entity/fraction_entity.dart';
 
+import '../../domain/entity/set_enum.dart';
+import '../fraction_filter/FractionFilter.dart';
+
 class ViewFractionScreen extends BaseScreen {
   ViewFractionScreen() : super(_ViewFractionScreen());
 }
 
 class _ViewFractionScreen extends BaseState<ViewFractionScreen> {
   List<FractionEntity> listData = List.empty();
+  List<FractionEntity> allFraction = List.empty();
+  List<SetEnum> filter = List.empty();
 
   @override
   void initState() {
@@ -21,10 +26,14 @@ class _ViewFractionScreen extends BaseState<ViewFractionScreen> {
   }
 
   Future _getData() async {
-    String data = await rootBundle.loadString('all_fraction.json');
+    WidgetsFlutterBinding.ensureInitialized();
+    String data = await rootBundle.loadString('assets/all_fraction.json');
     List<FractionEntity> parsedList = List<FractionEntity>.from(
         await json.decode(data).map((model) => FractionEntity.fromJson(model)));
-    this.setState(() => {listData = parsedList});
+    this.setState(() {
+      listData = parsedList;
+      allFraction = parsedList;
+    });
   }
 
   @override
@@ -37,7 +46,26 @@ class _ViewFractionScreen extends BaseState<ViewFractionScreen> {
             child: Text(AppLocalizations.of(context)?.watch_fraction ?? ""),
           ),
           ElevatedButton.icon(
-              onPressed: () => {},
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return FractionFilterDialog(
+                        title: Text(
+                            AppLocalizations.of(context)?.select_dls ?? ""),
+                        fraction: allFraction,
+                        selectedFraction: listData,
+                        selectedDlsCallBack: (List<SetEnum> filters) {
+                          setState(() {
+                            listData = allFraction
+                                .where(
+                                    (element) => filters.contains(element.set))
+                                .toList();
+                          });
+                        },
+                      );
+                    });
+              },
               icon: Icon(Icons.sort),
               label: Text(AppLocalizations.of(context)?.filter_by_dlc ?? ""))
         ],
