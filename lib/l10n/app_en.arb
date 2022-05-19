@@ -6,5 +6,7 @@
   "in_develop": "In develop",
   "filter_by_dlc": "Filter by dlc",
   "select_dls": "Select DLC to filter",
-  "apply": "Apply"
+  "apply": "Apply",
+  "enter_player_count": "Enter player count",
+  "select_fraction": "Select Fraction"
 }
