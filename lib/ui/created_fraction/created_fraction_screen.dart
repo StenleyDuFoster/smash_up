@@ -74,7 +74,7 @@ class _CreatedFractionScreen extends BaseState<CreatedFractionScreen> {
     List<_UserWithFraction> resultList = [];
     List<FractionEntity> localFraction = [];
 
-    localFraction = fraction;
+    localFraction.addAll(fraction);
     int index = 0;
 
     while (resultList.length < playerCount) {
