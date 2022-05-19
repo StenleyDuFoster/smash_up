@@ -5,9 +5,9 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:smash_up/ui/start_screen/start_screen.dart';
 
-import '../domain/db_model/fraction_db_model.dart';
-import '../firebase_options.dart';
-import '../navigation/nav_const.dart';
+import 'domain/db_model/fraction_db_model.dart';
+import 'firebase_options.dart';
+import 'navigation/nav_const.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
