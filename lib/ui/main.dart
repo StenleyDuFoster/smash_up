@@ -53,13 +53,13 @@ class MyApp extends StatelessWidget {
       ],
       home: StartScreen(),
       routes: {
-        Screen.Start.name: (BuildContext context) => Screen.Start.screen,
+        Screen.Start.name: (BuildContext context) => Screen.Start.screen(ModalRoute.of(context)?.settings.arguments),
         Screen.CreateGame.name: (BuildContext context) =>
-            Screen.CreateGame.screen,
+            Screen.CreateGame.screen(ModalRoute.of(context)?.settings.arguments),
         Screen.CreatedFraction.name: (BuildContext context) =>
-            Screen.CreatedFraction.screen,
+            Screen.CreatedFraction.screen(ModalRoute.of(context)?.settings.arguments),
         Screen.ViewFraction.name: (BuildContext context) =>
-            Screen.ViewFraction.screen,
+            Screen.ViewFraction.screen(ModalRoute.of(context)?.settings.arguments),
       },
     );
   }

@@ -9,12 +9,14 @@ import '../../domain/entity/set_enum.dart';
 import '../fraction_filter/FractionFilter.dart';
 
 class ChoseFractionDialog extends AlertDialog {
+  @override
   Widget title;
   Function selectedFractionCallback;
 
   ChoseFractionDialog(
-      {required this.selectedFractionCallback, required this.title})
+      {Key? key, required this.selectedFractionCallback, required this.title})
       : super(
+            key: key,
             content: _SelectFractionWidget(
                 selectedFractionCallback: selectedFractionCallback),
             title: title);
@@ -41,11 +43,10 @@ class _SelectFractionState extends State<_SelectFractionWidget> {
   }
 
   Future _getData() async {
-    WidgetsFlutterBinding.ensureInitialized();
     String data = await rootBundle.loadString('assets/all_fraction.json');
     List<FractionEntity> parsedList = List<FractionEntity>.from(
         await json.decode(data).map((model) => FractionEntity.fromJson(model)));
-    this.setState(() {
+    setState(() {
       listData = parsedList;
       allFraction = parsedList;
     });
@@ -83,12 +84,12 @@ class _SelectFractionState extends State<_SelectFractionWidget> {
                       );
                     });
               },
-              icon: Icon(Icons.sort),
+              icon: const Icon(Icons.sort),
               label: Text(AppLocalizations.of(context)?.filter_by_dlc ?? "")),
           Expanded(
             child: Padding(
+              padding: const EdgeInsets.all(10),
               child: _buildList(),
-              padding: EdgeInsets.all(10),
             ),
           ),
           TextButton(
@@ -136,7 +137,7 @@ class _SelectFractionState extends State<_SelectFractionWidget> {
                           ),
                           Text(
                             listData[index].name,
-                            style: TextStyle(color: Colors.black),
+                            style: const TextStyle(color: Colors.black),
                             textAlign: TextAlign.center,
                           ),
                         ],
@@ -161,7 +162,7 @@ class _SelectFractionState extends State<_SelectFractionWidget> {
       },
       itemCount: listData.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: (MediaQuery.of(context).size.width / 105).toInt(),
+        crossAxisCount: MediaQuery.of(context).size.width ~/ 105,
         crossAxisSpacing: MediaQuery.of(context).size.width / 105,
         mainAxisSpacing: MediaQuery.of(context).size.width / 105,
       ),

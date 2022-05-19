@@ -23,7 +23,7 @@ class _CreateGameScreen extends BaseState<CreateGameScreen> {
       appBar:
           AppBar(title: Text(AppLocalizations.of(context)?.create_game ?? "")),
       body: Container(
-        padding: EdgeInsets.all(50),
+        padding: const EdgeInsets.all(50),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -50,11 +50,10 @@ class _CreateGameScreen extends BaseState<CreateGameScreen> {
             Card(
               child: InkWell(
                 child: Padding(
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     child: Center(
                         child: Text(
-                            (AppLocalizations.of(context)?.select_fraction ??
-                                    "") + "(" + fraction.length.toString() + ")"))),
+                            "${AppLocalizations.of(context)?.select_fraction ?? ""}(${fraction.length})"))),
                 onTap: () {
                   showDialog(
                       context: context,
@@ -77,19 +76,25 @@ class _CreateGameScreen extends BaseState<CreateGameScreen> {
                 },
               ),
             ),
-            Spacer(),
+            const Spacer(),
             Visibility(
               visible: _isInputValid,
               child: Card(
                 child: InkWell(
                   child: Padding(
-                      padding: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
                       child: Center(
                           child: Text(
                               AppLocalizations.of(context)?.create_game ??
                                   ""))),
                   onTap: () {
-                    Navigator.pushNamed(context, Screen.CreatedFraction.name);
+                    if (fraction.length < int.parse(inputText) * 2) {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text(AppLocalizations.of(context)?.fraction_count_must_be_beggar ?? ""),
+                      ));
+                    } else {
+                      Navigator.pushNamed(context, Screen.CreatedFraction.name, arguments:{int.parse(inputText): fraction});
+                    }
                   },
                 ),
               ),
@@ -121,13 +126,14 @@ class _CustomRangeTextInputFormatter extends TextInputFormatter {
     TextEditingValue oldValue,
     TextEditingValue newValue,
   ) {
-    if (newValue.text == '')
-      return TextEditingValue();
-    else if (int.parse(newValue.text) < 1)
-      return TextEditingValue().copyWith(text: '1');
+    if (newValue.text == '') {
+      return const TextEditingValue();
+    } else if (int.parse(newValue.text) < 1) {
+      return const TextEditingValue().copyWith(text: '1');
+    }
 
     return int.parse(newValue.text) > 20
-        ? TextEditingValue().copyWith(text: '20')
+        ? const TextEditingValue().copyWith(text: '20')
         : newValue;
   }
 }
