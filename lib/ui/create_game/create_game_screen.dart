@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:smash_up/core/base_screen.dart';
-import 'package:smash_up/navigation/nav_const.dart';
-import 'package:smash_up/ui/chose_fraction/ChoseFractionDialog.dart';
 
+import '../../core/base_screen.dart';
 import '../../domain/entity/fraction_entity.dart';
+import '../../navigation/nav_const.dart';
+import '../chose_fraction/ChoseFractionDialog.dart';
 
 class CreateGameScreen extends BaseScreen {
   CreateGameScreen() : super(_CreateGameScreen());

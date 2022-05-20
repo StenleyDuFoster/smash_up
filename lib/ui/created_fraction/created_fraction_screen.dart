@@ -2,8 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:smash_up/core/base_screen.dart';
 
+import '../../core/base_screen.dart';
 import '../../domain/entity/fraction_entity.dart';
 
 class CreatedFractionScreen extends BaseScreen {

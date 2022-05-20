@@ -1,5 +1,5 @@
+import 'package:SmashUp/domain/entity/set_enum.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:smash_up/domain/entity/set_enum.dart';
 
 class FractionEntity {
   FractionEntity(

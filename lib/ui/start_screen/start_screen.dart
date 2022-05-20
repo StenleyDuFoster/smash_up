@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:smash_up/navigation/nav_const.dart';
 
 import '../../core/base_screen.dart';
+import '../../navigation/nav_const.dart';
 
 class StartScreen extends BaseScreen {
   StartScreen() : super(_StartScreen());

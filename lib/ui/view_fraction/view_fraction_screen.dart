@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:smash_up/core/base_screen.dart';
-import 'package:smash_up/domain/entity/fraction_entity.dart';
 
+import '../../core/base_screen.dart';
+import '../../domain/entity/fraction_entity.dart';
 import '../../domain/entity/set_enum.dart';
 import '../fraction_filter/FractionFilter.dart';
 

@@ -1,5 +1,6 @@
 import 'package:hive/hive.dart';
-import 'package:smash_up/domain/db_model/fraction_db_model.dart';
+
+import '../../domain/db_model/fraction_db_model.dart';
 
 class FractionLocalDb {
 

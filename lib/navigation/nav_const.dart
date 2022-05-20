@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:smash_up/domain/entity/fraction_entity.dart';
-import 'package:smash_up/ui/create_game/create_game_screen.dart';
-import 'package:smash_up/ui/created_fraction/created_fraction_screen.dart';
-import 'package:smash_up/ui/start_screen/start_screen.dart';
-import 'package:smash_up/ui/view_fraction/view_fraction_screen.dart';
+
+import '../domain/entity/fraction_entity.dart';
+import '../ui/create_game/create_game_screen.dart';
+import '../ui/created_fraction/created_fraction_screen.dart';
+import '../ui/start_screen/start_screen.dart';
+import '../ui/view_fraction/view_fraction_screen.dart';
 
 enum Screen {
   Start, ViewFraction, CreatedFraction, CreateGame

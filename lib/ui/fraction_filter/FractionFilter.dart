@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:smash_up/domain/entity/set_enum.dart';
 
 import '../../domain/entity/fraction_entity.dart';
+import '../../domain/entity/set_enum.dart';
 
 class FractionFilterDialog extends AlertDialog {
   List<FractionEntity> fraction;
