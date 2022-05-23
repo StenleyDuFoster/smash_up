@@ -19,20 +19,23 @@ class FractionDbModelAdapter extends TypeAdapter<FractionDbModel> {
     return FractionDbModel(
       name: fields[0] as String,
       imageLocal: fields[1] as String?,
-      imageNetwork: fields[2] as String?,
+      nameUa: fields[2] as String?,
+      setName: fields[3] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, FractionDbModel obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
       ..write(obj.imageLocal)
       ..writeByte(2)
-      ..write(obj.imageNetwork);
+      ..write(obj.nameUa)
+      ..writeByte(3)
+      ..write(obj.setName);
   }
 
   @override

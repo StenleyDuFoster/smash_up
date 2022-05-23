@@ -29,23 +29,23 @@ class FirestoreManager {
 
       List<FractionDbModel> dataList = [];
 
-      await Future.forEach(
-          data.docs.map((e) {
-            return FractionDbModel.fromJson(e.data());
-          }).toList(), (FractionDbModel element) async {
-        String? url = element.imageNetwork;
-        FractionDbModel newElement = element;
-        if (url != null) {
-          try {
-            newElement.imageNetwork = await FirebaseStorage.instance
-                .refFromURL(element.imageNetwork ?? "")
-                .getDownloadURL();
-          } catch (_) {
-
-          }
-        }
-        dataList.add(newElement);
-      });
+      // await Future.forEach(
+      //     data.docs.map((e) {
+      //       return FractionDbModel.fromJson(e.data());
+      //     }).toList(), (FractionDbModel element) async {
+      //   String? url = element.imageNetwork;
+      //   FractionDbModel newElement = element;
+      //   if (url != null) {
+      //     try {
+      //       newElement.imageNetwork = await FirebaseStorage.instance
+      //           .refFromURL(element.imageNetwork ?? "")
+      //           .getDownloadURL();
+      //     } catch (_) {
+      //
+      //     }
+      //   }
+      //   dataList.add(newElement);
+      // });
 
       return dataList;
     } catch (e) {

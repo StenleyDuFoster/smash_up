@@ -1,3 +1,4 @@
+import 'package:SmashUp/data/local/fraction_singletone.dart';
 import 'package:SmashUp/ui/start_screen/start_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ import 'navigation/nav_const.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  Fraction.instance;
   runApp(const MyApp());
 }
 
@@ -24,7 +26,9 @@ class MyApp extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.done) {
           return _buildApp();
         }
-        return Container(child: Center(child:CircularProgressIndicator.adaptive()),);
+        return Container(
+          child: Center(child: CircularProgressIndicator.adaptive()),
+        );
       },
       future: Future.wait([
         Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform),
@@ -53,13 +57,17 @@ class MyApp extends StatelessWidget {
       ],
       home: StartScreen(),
       routes: {
-        Screen.Start.name: (BuildContext context) => Screen.Start.screen(ModalRoute.of(context)?.settings.arguments),
+        Screen.Start.name: (BuildContext context) =>
+            Screen.Start.screen(ModalRoute.of(context)?.settings.arguments),
         Screen.CreateGame.name: (BuildContext context) =>
-            Screen.CreateGame.screen(ModalRoute.of(context)?.settings.arguments),
+            Screen.CreateGame.screen(
+                ModalRoute.of(context)?.settings.arguments),
         Screen.CreatedFraction.name: (BuildContext context) =>
-            Screen.CreatedFraction.screen(ModalRoute.of(context)?.settings.arguments),
+            Screen.CreatedFraction.screen(
+                ModalRoute.of(context)?.settings.arguments),
         Screen.ViewFraction.name: (BuildContext context) =>
-            Screen.ViewFraction.screen(ModalRoute.of(context)?.settings.arguments),
+            Screen.ViewFraction.screen(
+                ModalRoute.of(context)?.settings.arguments),
       },
     );
   }

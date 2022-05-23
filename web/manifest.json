@@ -1,11 +1,11 @@
 {
-    "name": "smash_up",
-    "short_name": "smash_up",
+    "name": "Smash Up",
+    "short_name": "SU",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Smash up helper",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

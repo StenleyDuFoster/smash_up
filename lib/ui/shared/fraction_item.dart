@@ -3,16 +3,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class FractionWidget extends StatefulWidget {
-
   FractionEntity item;
   bool? isSelected;
   Function? clickListener;
+  bool Function()? tapNow;
 
-  FractionWidget({required this.item, this.clickListener, this.isSelected});
+  FractionWidget(
+      {required this.item, this.clickListener, this.isSelected, this.tapNow});
 
   @override
   State<StatefulWidget> createState() => _FractionState();
-
 }
 
 class _FractionState extends State<FractionWidget> {
@@ -22,9 +22,7 @@ class _FractionState extends State<FractionWidget> {
       child: Card(
         child: InkWell(
           child: Container(
-            color: widget.isSelected == true
-                ? Colors.blue
-                : Colors.white,
+            color: widget.isSelected == true ? Colors.blue : Colors.white,
             child: Stack(
               children: [
                 Align(
@@ -58,6 +56,26 @@ class _FractionState extends State<FractionWidget> {
               ],
             ),
           ),
+          onHover: (hover) {
+            // if (!hover) {
+            //   return;
+            // }
+            // bool tapNow;
+            // if (widget.tapNow == null) {
+            //   return;
+            // }
+            // tapNow = widget.tapNow!();
+            // if (!tapNow) {
+            //   return;
+            // }
+            // bool? isSelected = widget.isSelected;
+            // if (isSelected != null) {
+            //   setState(() {
+            //     widget.isSelected = !isSelected;
+            //   });
+            // }
+            // widget.clickListener?.call();
+          },
           onTap: () {
             bool? isSelected = widget.isSelected;
             if (isSelected != null) {
@@ -71,5 +89,4 @@ class _FractionState extends State<FractionWidget> {
       ),
     );
   }
-
 }

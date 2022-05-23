@@ -1,11 +1,13 @@
 import 'dart:convert';
 
+import 'package:SmashUp/data/local/fraction_local_db.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../core/base_screen.dart';
+import '../../data/local/fraction_singletone.dart';
 import '../../domain/entity/fraction_entity.dart';
 import '../../domain/entity/set_enum.dart';
 import '../fraction_filter/FractionFilter.dart';
@@ -27,66 +29,81 @@ class _ViewFractionScreen extends BaseState<ViewFractionScreen> {
   }
 
   Future _getData() async {
-    WidgetsFlutterBinding.ensureInitialized();
-    String data = await rootBundle.loadString('assets/all_fraction.json');
-    List<FractionEntity> parsedList = List<FractionEntity>.from(
-        await json.decode(data).map((model) => FractionEntity.fromJson(model)));
-    this.setState(() {
+    List<FractionEntity> parsedList = await Fraction.instance.getData();
+    setState(() {
       listData = parsedList;
       allFraction = parsedList;
     });
+
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-          title: Row(
-        children: [
-          Expanded(
-            child: Text(AppLocalizations.of(context)?.watch_fraction ?? ""),
-          ),
-          ElevatedButton.icon(
-              onPressed: () {
-                showDialog(
-                    context: context,
-                    builder: (context) {
-                      return FractionFilterDialog(
-                        title: Text(
-                            AppLocalizations.of(context)?.select_dls ?? ""),
-                        fraction: allFraction,
-                        selectedFraction: listData,
-                        selectedDlsCallBack: (List<SetEnum> filters) {
-                          setState(() {
-                            listData = allFraction
-                                .where(
-                                    (element) => filters.contains(element.set))
-                                .toList();
-                          });
+    return FutureBuilder(
+      future: Fraction.instance.getData(),
+      builder: (context, snapshot) {
+        if (snapshot.data == null) {
+          return Container(
+            child: Center(
+              child: CircularProgressIndicator.adaptive(),
+            ),
+          );
+        } else {
+          listData = snapshot.data as List<FractionEntity>;
+          allFraction = snapshot.data as List<FractionEntity>;
+
+          return Scaffold(
+            appBar: AppBar(
+                title: Row(
+                  children: [
+                    Expanded(
+                      child: Text(AppLocalizations.of(context)?.watch_fraction ?? ""),
+                    ),
+                    ElevatedButton.icon(
+                        onPressed: () {
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return FractionFilterDialog(
+                                  title: Text(
+                                      AppLocalizations.of(context)?.select_dls ?? ""),
+                                  fraction: allFraction,
+                                  selectedFraction: listData,
+                                  selectedDlsCallBack: (List<SetEnum> filters) {
+                                    setState(() {
+                                      listData = allFraction
+                                          .where(
+                                              (element) => filters.contains(element.set))
+                                          .toList();
+                                    });
+                                  },
+                                );
+                              });
                         },
-                      );
-                    });
-              },
-              icon: Icon(Icons.sort),
-              label: Text(AppLocalizations.of(context)?.filter_by_dlc ?? ""))
-        ],
-      )),
-      body: Column(
-        children: [Expanded(child: _buildList()), _buildAddButton()],
-      ),
+                        icon: Icon(Icons.sort),
+                        label: Text(AppLocalizations.of(context)?.filter_by_dlc ?? ""))
+                  ],
+                )),
+            body: Column(
+              children: [Expanded(child: _buildList()), _buildAddButton()],
+            ),
+          );
+        }
+      },
     );
   }
 
   Widget _buildList() {
+    double size = MediaQuery.of(context).size.width / 105;
     return GridView.builder(
       itemBuilder: (BuildContext context, int index) {
         return FractionWidget(item: listData[index]);
       },
       itemCount: listData.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: (MediaQuery.of(context).size.width / 105).toInt(),
-        crossAxisSpacing: MediaQuery.of(context).size.width / 105,
-        mainAxisSpacing: MediaQuery.of(context).size.width / 105,
+        crossAxisCount: size.toInt(),
+        crossAxisSpacing: size,
+        mainAxisSpacing: size,
       ),
     );
   }

@@ -1,29 +1,31 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../data/local/fraction_local_db.dart';
+import '../../data/local/fraction_singletone.dart';
 import '../../domain/entity/fraction_entity.dart';
 import '../../domain/entity/set_enum.dart';
 import '../fraction_filter/FractionFilter.dart';
 import '../shared/fraction_item.dart';
 
 class ChoseFractionDialog extends AlertDialog {
-
   @override
   Widget title;
   Function selectedFractionCallback;
   List<FractionEntity> oldSelected;
 
   ChoseFractionDialog(
-      {Key? key, required this.selectedFractionCallback, required this.title, required this.oldSelected})
+      {Key? key,
+      required this.selectedFractionCallback,
+      required this.title,
+      required this.oldSelected})
       : super(
-      key: key,
-      content: _SelectFractionWidget(
-        selectedFractionCallback: selectedFractionCallback,
-        oldSelected: oldSelected,),
-      title: title);
+            key: key,
+            content: _SelectFractionWidget(
+              selectedFractionCallback: selectedFractionCallback,
+              oldSelected: oldSelected,
+            ),
+            title: title);
 }
 
 class _SelectFractionWidget extends StatefulWidget {
@@ -52,9 +54,7 @@ class _SelectFractionState extends State<_SelectFractionWidget> {
   }
 
   Future _getData() async {
-    String data = await rootBundle.loadString('assets/all_fraction.json');
-    List<FractionEntity> parsedList = List<FractionEntity>.from(
-        await json.decode(data).map((model) => FractionEntity.fromJson(model)));
+    List<FractionEntity> parsedList = await Fraction.instance.getData();
     setState(() {
       listData = parsedList;
       allFraction = parsedList;
@@ -64,14 +64,8 @@ class _SelectFractionState extends State<_SelectFractionWidget> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery
-          .of(context)
-          .size
-          .height / 1.5,
-      width: MediaQuery
-          .of(context)
-          .size
-          .width / 1.5,
+      height: MediaQuery.of(context).size.height / 1.5,
+      width: MediaQuery.of(context).size.width / 1.5,
       child: Column(
         children: [
           ElevatedButton.icon(
@@ -81,9 +75,7 @@ class _SelectFractionState extends State<_SelectFractionWidget> {
                     builder: (context) {
                       return FractionFilterDialog(
                         title: Text(
-                            AppLocalizations
-                                .of(context)
-                                ?.select_dls ?? ""),
+                            AppLocalizations.of(context)?.select_dls ?? ""),
                         fraction: allFraction,
                         selectedFraction: listData,
                         selectedDlsCallBack: (List<SetEnum> filters) {
@@ -102,9 +94,7 @@ class _SelectFractionState extends State<_SelectFractionWidget> {
                     });
               },
               icon: const Icon(Icons.sort),
-              label: Text(AppLocalizations
-                  .of(context)
-                  ?.filter_by_dlc ?? "")),
+              label: Text(AppLocalizations.of(context)?.filter_by_dlc ?? "")),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(10),
@@ -114,17 +104,18 @@ class _SelectFractionState extends State<_SelectFractionWidget> {
           TextButton(
               onPressed: () {
                 widget.selectedFractionCallback(selectedData);
+                FractionLocalDb.instance().saveSelectedFraction(selectedData);
                 Navigator.pop(context);
               },
-              child: Text(AppLocalizations
-                  .of(context)
-                  ?.apply ?? ""))
+              child: Text(AppLocalizations.of(context)?.apply ?? ""))
         ],
       ),
     );
   }
 
   Widget _buildList() {
+    bool tapNow = false;
+    double size = MediaQuery.of(context).size.width / 105;
     return GridView.builder(
       itemBuilder: (BuildContext context, int index) {
         FractionEntity? findedFraction;
@@ -132,9 +123,7 @@ class _SelectFractionState extends State<_SelectFractionWidget> {
           findedFraction = selectedData.firstWhere((e) {
             return e.name == listData[index].name;
           });
-        } catch (e) {
-
-        }
+        } catch (e) {}
         return FractionWidget(
           item: listData[index],
           isSelected: findedFraction != null,
@@ -144,31 +133,21 @@ class _SelectFractionState extends State<_SelectFractionWidget> {
               findedFraction = selectedData.firstWhere((e) {
                 return e.name == listData[index].name;
               });
-            } catch (e) {
-
-            }
+            } catch (e) {}
             if (findedFraction == null) {
               selectedData.add(listData[index]);
             } else {
               selectedData.remove(findedFraction);
             }
           },
+          tapNow: () => tapNow,
         );
       },
       itemCount: listData.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: MediaQuery
-            .of(context)
-            .size
-            .width ~/ 105,
-        crossAxisSpacing: MediaQuery
-            .of(context)
-            .size
-            .width / 105,
-        mainAxisSpacing: MediaQuery
-            .of(context)
-            .size
-            .width / 105,
+        crossAxisCount: size.toInt(),
+        crossAxisSpacing: size,
+        mainAxisSpacing: size,
       ),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:SmashUp/domain/entity/fraction_entity.dart';
 import 'package:hive/hive.dart';
 
 import '../../domain/db_model/fraction_db_model.dart';
@@ -25,18 +26,19 @@ class FractionLocalDb {
   final String boxName = "fraction";
 
 
-  Future<List<FractionDbModel>> getAllFraction() async {
+  Future<List<FractionEntity>> getPreviousSelectedFraction() async {
     try {
       await _initBox();
-      return box?.values?.toList() ?? List.empty();
+      return (box?.values?.toList() ?? List.empty()).map((e) => e.toEntity()).toList();
     } catch (e) {
       return List.empty();
     }
   }
 
-  Future addFraction(FractionDbModel model) async {
+  Future saveSelectedFraction(List<FractionEntity> data) async {
     await _initBox();
-    await box?.add(model);
+    await box?.clear();
+    await box?.addAll(data.map((e) => FractionDbModel.fromEntity(e)).toList());
   }
 
   Future _initBox() async {
