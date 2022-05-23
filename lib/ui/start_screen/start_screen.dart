@@ -53,8 +53,9 @@ class _StartScreen extends BaseState<StartScreen> {
                     child: Text(AppLocalizations.of(context)?.log_in ?? "")),
               ),
             ),
-            Visibility(
-              visible: true,
+            AnimatedOpacity (
+              duration: const Duration(milliseconds: 500),
+              opacity: 1,
               child: Padding(
                 padding: EdgeInsets.all(10),
                 child: InkWell(
@@ -62,7 +63,7 @@ class _StartScreen extends BaseState<StartScreen> {
                       padding: EdgeInsets.all(10),
                       child:
                           Text(Localizations.localeOf(context).languageCode)),
-                  onTap: () => {AppLocalizations.of(context)},
+                  onTap: () => {},
                 ),
               ),
             ),

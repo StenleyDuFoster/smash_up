@@ -11,7 +11,7 @@ class CreatedFractionScreen extends BaseScreen {
 
   CreatedFractionScreen({required this.arg})
       : super(_CreatedFractionScreen(
-      fraction: arg.values.first, playerCount: arg.keys.first));
+            fraction: arg.values.first, playerCount: arg.keys.first));
 }
 
 class _CreatedFractionScreen extends BaseState<CreatedFractionScreen> {
@@ -32,40 +32,47 @@ class _CreatedFractionScreen extends BaseState<CreatedFractionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar:
-      AppBar(title: Text(AppLocalizations
-          .of(context)
-          ?.create_game ?? "")),
+          AppBar(title: Text(AppLocalizations.of(context)?.create_game ?? "")),
       body: ListView.builder(
         itemBuilder: (context, index) {
-          return Column(
-            children: [
-              Text(data[index].name),
-              Row(
-                children: [
-                  SizedBox(
-                    width: MediaQuery
-                        .of(context)
-                        .size
-                        .width / 8,
-                  ),
-                  Text(data[index].firstFraction.name),
-                ],
-              ),
-              Row(
-                children: [
-                  SizedBox(
-                    width: MediaQuery
-                        .of(context)
-                        .size
-                        .width / 8,
-                  ),
-                  Text(data[index].secondFraction.name)
-                ],
-              )
-            ],
-          );
+          if (index == 0) {
+            return SizedBox(height: 20, width: 20);
+          } else if (index == data.length + 1) {
+            return SizedBox(height: 20, width: 20);
+          } else {
+            _UserWithFraction item = data[index - 1];
+            return Column(
+              children: [
+                Text(item.name),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      item.firstFraction.getAssetImage(),
+                      width: 50,
+                      height: 50,
+                    ),
+                    SizedBox(height: 20, width: 20),
+                    Text(item.firstFraction.name),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      item.secondFraction.getAssetImage(),
+                      width: 50,
+                      height: 50,
+                    ),
+                    SizedBox(height: 20, width: 20),
+                    Text(item.secondFraction.name)
+                  ],
+                )
+              ],
+            );
+          }
         },
-        itemCount: data.length,
+        itemCount: data.length + 2,
       ),
     );
   }
@@ -78,13 +85,16 @@ class _CreatedFractionScreen extends BaseState<CreatedFractionScreen> {
     int index = 0;
 
     while (resultList.length < playerCount) {
-      index ++;
+      index++;
       FractionEntity firstFraction = getRandomFraction(localFraction);
       localFraction.remove(firstFraction);
       FractionEntity secondFraction = getRandomFraction(localFraction);
       localFraction.remove(secondFraction);
 
-      resultList.add(_UserWithFraction(name: "Player " + index.toString(), firstFraction: firstFraction, secondFraction: secondFraction));
+      resultList.add(_UserWithFraction(
+          name: "Player " + index.toString(),
+          firstFraction: firstFraction,
+          secondFraction: secondFraction));
     }
 
     return resultList;
@@ -96,16 +106,15 @@ class _CreatedFractionScreen extends BaseState<CreatedFractionScreen> {
     }
     return data[Random.secure().nextInt(data.length - 1)];
   }
-
 }
 
 class _UserWithFraction {
-
   String name;
   FractionEntity firstFraction;
   FractionEntity secondFraction;
 
   _UserWithFraction(
-      {required this.name, required this.secondFraction, required this.firstFraction});
-
+      {required this.name,
+      required this.secondFraction,
+      required this.firstFraction});
 }

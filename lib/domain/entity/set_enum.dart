@@ -30,9 +30,9 @@ enum SetEnum {
     switch (string) {
       case "Core Set":
         return SetEnum.Core;
-      case "Awesome Level 9000":
+      case "Awesome Level 9000":// козаки проти помідорыв
         return SetEnum.Awesome;
-      case "The Obligatory Cthulhu Set":
+      case "The Obligatory Cthulhu Set": // Ктулху
         return SetEnum.Cthulhu;
       case "Science Fiction Double Feature":
         return SetEnum.Science;
@@ -40,11 +40,11 @@ enum SetEnum {
         return SetEnum.Geeky;
       case "Monster Smash":
         return SetEnum.MonsterSmash;
-      case "Pretty Pretty Smash Up":
+      case "Pretty Pretty Smash Up":// заміміміс
         return SetEnum.Pretty;
       case "Smash Up: Munchkin":
         return SetEnum.Munchkin;
-      case "It’s Your Fault!":
+      case "It’s Your Fault!": // Війна без кінцівок
         return SetEnum.Fault;
       case "Cease and Desist":
         return SetEnum.CeaseAndDesist;
@@ -66,7 +66,7 @@ enum SetEnum {
         return SetEnum.International;
       case "Smash Up Penguins":
         return SetEnum.Penguins;
-      case "World Tour: Culture Shock":
+      case "World Tour: Culture Shock": // Культурний шок
         return SetEnum.CultureShock;
       case "Smash Up: Marvel":
         return SetEnum.Marvel;

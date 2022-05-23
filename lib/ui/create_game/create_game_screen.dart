@@ -71,6 +71,7 @@ class _CreateGameScreen extends BaseState<CreateGameScreen> {
                           title: Text(
                               AppLocalizations.of(context)?.select_fraction ??
                                   ""),
+                          oldSelected: fraction,
                         );
                       });
                 },

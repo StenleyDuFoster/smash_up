@@ -9,6 +9,7 @@ import '../../core/base_screen.dart';
 import '../../domain/entity/fraction_entity.dart';
 import '../../domain/entity/set_enum.dart';
 import '../fraction_filter/FractionFilter.dart';
+import '../shared/fraction_item.dart';
 
 class ViewFractionScreen extends BaseScreen {
   ViewFractionScreen() : super(_ViewFractionScreen());
@@ -79,44 +80,7 @@ class _ViewFractionScreen extends BaseState<ViewFractionScreen> {
   Widget _buildList() {
     return GridView.builder(
       itemBuilder: (BuildContext context, int index) {
-        return SizedBox(
-          child: Card(
-            child: Container(
-              child: Stack(
-                children: [
-                  Align(
-                    alignment: Alignment.center,
-                    child: Image.asset(
-                      listData[index].getAssetImage(),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Stack(
-                      children: [
-                        Text(
-                          listData[index].name,
-                          style: TextStyle(
-                            foreground: Paint()
-                              ..style = PaintingStyle.stroke
-                              ..strokeWidth = 2
-                              ..color = Colors.white,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        Text(
-                          listData[index].name,
-                          style: TextStyle(color: Colors.black),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        );
+        return FractionWidget(item: listData[index]);
       },
       itemCount: listData.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
