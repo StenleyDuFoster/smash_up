@@ -38,6 +38,9 @@ class FractionLocalDb {
   Future saveSelectedFraction(List<FractionEntity> data) async {
     await _initBox();
     await box?.clear();
+    if (data.isEmpty) {
+      return;
+    }
     await box?.addAll(data.map((e) => FractionDbModel.fromEntity(e)).toList());
   }
 

@@ -101,10 +101,7 @@ class _CreatedFractionScreen extends BaseState<CreatedFractionScreen> {
   }
 
   FractionEntity getRandomFraction(List<FractionEntity> data) {
-    if (data.length == 1) {
-      return data.first;
-    }
-    return data[Random.secure().nextInt(data.length - 1)];
+    return data[Random.secure().nextInt(data.length)];
   }
 }
 
