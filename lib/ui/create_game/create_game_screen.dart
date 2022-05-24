@@ -156,8 +156,8 @@ class _CustomRangeTextInputFormatter extends TextInputFormatter {
       return const TextEditingValue().copyWith(text: '1');
     }
 
-    return int.parse(newValue.text) > 20
-        ? const TextEditingValue().copyWith(text: '20')
+    return int.parse(newValue.text) > 49
+        ? const TextEditingValue().copyWith(text: '49')
         : newValue;
   }
 }

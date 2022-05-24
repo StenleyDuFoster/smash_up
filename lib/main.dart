@@ -6,6 +6,7 @@ import 'package:SmashUp/util/app_locale.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'data/local/preferences.dart';
@@ -14,7 +15,8 @@ import 'firebase_options.dart';
 import 'navigation/nav_const.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   Fraction.instance;
   runApp(MyApp());
 }
@@ -57,6 +59,7 @@ class _LocalizedApp extends StatefulWidget {
 
   _LocalizedApp(Locale locale) {
     _currentLocale = locale;
+    AppLocale.instance.setLocale(locale);
   }
 
   @override
@@ -75,6 +78,7 @@ class LocalizedAppState extends State<_LocalizedApp> {
 
       });
     });
+    FlutterNativeSplash.remove();
     super.initState();
   }
 

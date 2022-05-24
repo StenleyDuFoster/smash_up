@@ -47,6 +47,11 @@ class _FractionFilterWidget extends StatefulWidget {
       if (!values.contains(element.dlsName)) {
         resultLis.add(element);
         values.add(element.dlsName);
+      } else {
+        _DlsDto currentData = resultLis.last;
+        if (!currentData.isSelected && element.isSelected) {
+          currentData.isSelected = true;
+        }
       }
     });
 

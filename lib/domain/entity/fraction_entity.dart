@@ -32,4 +32,12 @@ class FractionEntity {
   String getAssetImage() {
     return "assets/image/" + assetImage;
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (other is FractionEntity && other.name == this.name) {
+      return true;
+    }
+    return false;
+  }
 }

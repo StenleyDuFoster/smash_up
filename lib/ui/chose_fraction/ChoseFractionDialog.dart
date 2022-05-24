@@ -77,7 +77,7 @@ class _SelectFractionState extends State<_SelectFractionWidget> {
                         title: Text(
                             AppLocalizations.of(context)?.select_dls ?? ""),
                         fraction: allFraction,
-                        selectedFraction: listData,
+                        selectedFraction: selectedData,
                         selectedDlsCallBack: (List<SetEnum> filters) {
                           setState(() {
                             listData = allFraction
