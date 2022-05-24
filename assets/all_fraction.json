@@ -187,7 +187,7 @@
   },
   {
     "name": "Halflings",
-    "name_ua": "Напіврослини",
+    "name_ua": "Карлики",
     "asset_image": "halflings_0.webp",
     "set": "Smash Up: Munchkin"
   },
@@ -253,7 +253,7 @@
   },
   {
     "name": "Changerbots",
-    "name_ua": "Боти-чейнджери",
+    "name_ua": "Трансформери",
     "asset_image": "changerbots_0.webp",
     "set": "Cease and Desist"
   },

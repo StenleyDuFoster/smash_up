@@ -1,3 +1,4 @@
+import 'package:SmashUp/domain/entity/player_entity.dart';
 import 'package:flutter/material.dart';
 
 import '../domain/entity/fraction_entity.dart';
@@ -18,7 +19,7 @@ extension ScreenExt on Screen {
       case Screen.ViewFraction:
         return ViewFractionScreen();
       case Screen.CreatedFraction:
-        return CreatedFractionScreen(arg: arg as Map<int, List<FractionEntity>>);
+        return CreatedFractionScreen(arg: arg as Map<List<PlayerEntity>, List<FractionEntity>>);
       case Screen.CreateGame:
         return CreateGameScreen();
     }

@@ -1,3 +1,5 @@
+import 'package:SmashUp/domain/entity/player_entity.dart';
+import 'package:SmashUp/util/color_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -6,7 +8,8 @@ import '../../core/base_screen.dart';
 import '../../data/local/fraction_local_db.dart';
 import '../../domain/entity/fraction_entity.dart';
 import '../../navigation/nav_const.dart';
-import '../chose_fraction/ChoseFractionDialog.dart';
+import '../chose_fraction/chose_fraction_dialog.dart';
+import '../chose_user_settings/chose_user_settings_dialog.dart';
 
 class CreateGameScreen extends BaseScreen {
   CreateGameScreen() : super(_CreateGameScreen());
@@ -14,7 +17,10 @@ class CreateGameScreen extends BaseScreen {
 
 class _CreateGameScreen extends BaseState<CreateGameScreen> {
   String inputText = "";
+  List<PlayerEntity> players = [];
   List<FractionEntity> fraction = [];
+
+  ColorHelper colorHelper = ColorHelper();
 
   bool _isInputValid = false;
 
@@ -37,7 +43,17 @@ class _CreateGameScreen extends BaseState<CreateGameScreen> {
 
           return Scaffold(
             appBar: AppBar(
-                title: Text(AppLocalizations.of(context)?.create_game ?? "")),
+              title: Row(
+                children: [
+                  Expanded(
+                      child: Text(
+                          AppLocalizations.of(context)?.create_game ?? "")),
+                  // ElevatedButton.icon(onPressed: () {
+                  //
+                  // }, icon: Icons.share, label: null,)
+                ],
+              ),
+            ),
             body: Container(
               padding: const EdgeInsets.all(50),
               child: Column(
@@ -47,6 +63,7 @@ class _CreateGameScreen extends BaseState<CreateGameScreen> {
                   TextField(
                     onChanged: (text) {
                       inputText = text;
+                      players = createDefaultList(context, players);
                       _checkIsInputValid();
                     },
                     decoration: InputDecoration(
@@ -94,6 +111,40 @@ class _CreateGameScreen extends BaseState<CreateGameScreen> {
                       },
                     ),
                   ),
+                  AnimatedOpacity(
+                    opacity: players.isNotEmpty ? 1 : 0,
+                    duration: Duration(milliseconds: 300),
+                    child: const SizedBox(
+                      width: 50,
+                      height: 50,
+                    ),
+                  ),
+                  AnimatedOpacity(
+                    opacity: players.isNotEmpty ? 1 : 0,
+                    duration: Duration(milliseconds: 300),
+                    child: Card(
+                      child: InkWell(
+                        child: Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: Center(
+                                child: Text(
+                                    "${AppLocalizations.of(context)?.customization_user ?? ""}"))),
+                        onTap: () {
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return ChoseUserSettingsDialog(
+                                  newUserData: (List<PlayerEntity> newPlayer) {
+                                    players = newPlayer;
+                                  },
+                                  defaultPlayers: players,
+                                  title: Text(AppLocalizations.of(context)?.customization_user ?? ""),
+                                );
+                              });
+                        },
+                      ),
+                    ),
+                  ),
                   const Spacer(),
                   AnimatedOpacity(
                     duration: Duration(milliseconds: 300),
@@ -116,7 +167,7 @@ class _CreateGameScreen extends BaseState<CreateGameScreen> {
                           } else {
                             Navigator.pushNamed(
                                 context, Screen.CreatedFraction.name,
-                                arguments: {int.parse(inputText): fraction});
+                                arguments: {players: fraction});
                           }
                         },
                       ),
@@ -127,6 +178,29 @@ class _CreateGameScreen extends BaseState<CreateGameScreen> {
             ),
           );
         });
+  }
+
+  List<PlayerEntity> createDefaultList(BuildContext context, List<PlayerEntity> startList) {
+    List<PlayerEntity> resultList = [];
+    resultList.addAll(startList);
+    int playerCount = int.parse(inputText);
+    List<Color> colorList = colorHelper.generateRandomList(playerCount, resultList.map((e) => e.color).toList());
+
+    if (resultList.length == playerCount) {
+      return resultList;
+    } else if (resultList.length > playerCount) {
+      while(resultList.length > playerCount) {
+        resultList.removeLast();
+      }
+      return resultList;
+    } else {
+      for (int i = resultList.length; i < playerCount; i++) {
+        resultList.add(PlayerEntity(
+            name: "${AppLocalizations.of(context)?.player ?? ""} ${i + 1}",
+            color: colorList.elementAt(i)));
+      }
+      return resultList;
+    }
   }
 
   void _checkIsInputValid() {
@@ -156,8 +230,8 @@ class _CustomRangeTextInputFormatter extends TextInputFormatter {
       return const TextEditingValue().copyWith(text: '1');
     }
 
-    return int.parse(newValue.text) > 49
-        ? const TextEditingValue().copyWith(text: '49')
+    return int.parse(newValue.text) > 34
+        ? const TextEditingValue().copyWith(text: '34')
         : newValue;
   }
 }

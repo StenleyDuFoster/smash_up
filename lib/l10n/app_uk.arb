@@ -11,5 +11,6 @@
   "enter_player_count": "Введіть кількість гравців",
   "select_fraction": "Виберіть фракцію",
   "fraction_count_must_be_beggar": "Кількість фракцій повинна бути в 2 раза більною кількості гравців",
-  "player": "Гравець"
+  "player": "Гравець",
+  "customization_user": "Налаштування гравців"
 }
