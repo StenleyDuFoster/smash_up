@@ -1,6 +1,10 @@
 import 'package:SmashUp/domain/entity/fraction_entity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'dart:ui' as ui;
+
+import '../../util/app_locale.dart';
 
 class FractionWidget extends StatefulWidget {
   FractionEntity item;
@@ -36,7 +40,7 @@ class _FractionState extends State<FractionWidget> {
                   child: Stack(
                     children: [
                       Text(
-                        widget.item.name,
+                        widget.item.getLocalizedName(AppLocale.instance.current),
                         style: TextStyle(
                           foreground: Paint()
                             ..style = PaintingStyle.stroke
@@ -46,7 +50,7 @@ class _FractionState extends State<FractionWidget> {
                         textAlign: TextAlign.center,
                       ),
                       Text(
-                        widget.item.name,
+                        widget.item.getLocalizedName(AppLocale.instance.current),
                         style: TextStyle(color: Colors.black),
                         textAlign: TextAlign.center,
                       ),

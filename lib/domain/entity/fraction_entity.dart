@@ -23,7 +23,7 @@ class FractionEntity {
   String setName;
 
   String getLocalizedName(Locale locale) {
-    if (locale.languageCode == "ua")
+    if (locale.languageCode == "uk")
       return uaName;
     else
       return name;

@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../core/base_screen.dart';
 import '../../navigation/nav_const.dart';
+import '../../util/app_locale.dart';
 
 class StartScreen extends BaseScreen {
   StartScreen() : super(_StartScreen());
@@ -35,10 +36,8 @@ class _StartScreen extends BaseState<StartScreen> {
             Padding(
               padding: EdgeInsets.all(10),
               child: InkWell(
-                child: Padding(
-                    padding: EdgeInsets.all(10),
-                    child: Text(Localizations.localeOf(context).languageCode)),
-                onTap: () => {AppLocalizations.of(context)},
+                child: Padding(padding: EdgeInsets.all(10), child: Text("EN")),
+                onTap: () => {AppLocale.instance.setLocale(Locale('en', ''))},
               ),
             ),
             Expanded(
@@ -53,17 +52,17 @@ class _StartScreen extends BaseState<StartScreen> {
                     child: Text(AppLocalizations.of(context)?.log_in ?? "")),
               ),
             ),
-            AnimatedOpacity (
+            AnimatedOpacity(
               duration: const Duration(milliseconds: 500),
               opacity: 1,
               child: Padding(
                 padding: EdgeInsets.all(10),
                 child: InkWell(
-                  child: Padding(
-                      padding: EdgeInsets.all(10),
-                      child:
-                          Text(Localizations.localeOf(context).languageCode)),
-                  onTap: () => {},
+                  child:
+                      Padding(padding: EdgeInsets.all(10), child: Text("UA")),
+                  onTap: () async {
+                    AppLocale.instance.setLocale(Locale("uk", ""));
+                  },
                 ),
               ),
             ),

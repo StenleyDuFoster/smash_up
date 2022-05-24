@@ -95,8 +95,9 @@ class _CreateGameScreen extends BaseState<CreateGameScreen> {
                     ),
                   ),
                   const Spacer(),
-                  Visibility(
-                    visible: _isInputValid,
+                  AnimatedOpacity(
+                    duration: Duration(milliseconds: 300),
+                    opacity: _isInputValid ? 1 : 0,
                     child: Card(
                       child: InkWell(
                         child: Padding(

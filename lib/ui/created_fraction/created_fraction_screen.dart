@@ -5,6 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../core/base_screen.dart';
 import '../../domain/entity/fraction_entity.dart';
+import '../../util/app_locale.dart';
 
 class CreatedFractionScreen extends BaseScreen {
   Map<int, List<FractionEntity>> arg;
@@ -43,7 +44,13 @@ class _CreatedFractionScreen extends BaseState<CreatedFractionScreen> {
             _UserWithFraction item = data[index - 1];
             return Column(
               children: [
-                Text(item.name),
+                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Text(AppLocalizations.of(context)?.player ?? ""),
+                  SizedBox(
+                    width: _textSize(" ").width,
+                  ),
+                  Text(item.name)
+                ]),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -53,7 +60,7 @@ class _CreatedFractionScreen extends BaseState<CreatedFractionScreen> {
                       height: 50,
                     ),
                     SizedBox(height: 20, width: 20),
-                    Text(item.firstFraction.name),
+                    Text(item.firstFraction.getLocalizedName(AppLocale.instance.current)),
                   ],
                 ),
                 Row(
@@ -65,7 +72,7 @@ class _CreatedFractionScreen extends BaseState<CreatedFractionScreen> {
                       height: 50,
                     ),
                     SizedBox(height: 20, width: 20),
-                    Text(item.secondFraction.name)
+                    Text(item.secondFraction.getLocalizedName(AppLocale.instance.current))
                   ],
                 )
               ],
@@ -92,7 +99,7 @@ class _CreatedFractionScreen extends BaseState<CreatedFractionScreen> {
       localFraction.remove(secondFraction);
 
       resultList.add(_UserWithFraction(
-          name: "Player " + index.toString(),
+          name: index.toString(),
           firstFraction: firstFraction,
           secondFraction: secondFraction));
     }
@@ -103,6 +110,14 @@ class _CreatedFractionScreen extends BaseState<CreatedFractionScreen> {
   FractionEntity getRandomFraction(List<FractionEntity> data) {
     return data[Random.secure().nextInt(data.length)];
   }
+
+  Size _textSize(String text) {
+    final TextPainter textPainter = TextPainter(
+        text: TextSpan(text: text), maxLines: 1, textDirection: TextDirection.ltr)
+      ..layout(minWidth: 0, maxWidth: double.infinity);
+    return textPainter.size;
+  }
+
 }
 
 class _UserWithFraction {
