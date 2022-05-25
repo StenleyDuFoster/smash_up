@@ -19,7 +19,7 @@ extension ScreenExt on Screen {
       case Screen.ViewFraction:
         return ViewFractionScreen();
       case Screen.CreatedFraction:
-        return CreatedFractionScreen(arg: arg as Map<List<PlayerEntity>, List<FractionEntity>>);
+        return CreatedFractionScreen(arg: arg is Map<List<PlayerEntity>, List<FractionEntity>> ? arg : null);
       case Screen.CreateGame:
         return CreateGameScreen();
     }

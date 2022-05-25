@@ -12,5 +12,6 @@
   "select_fraction": "Select Fraction",
   "fraction_count_must_be_beggar": "The number of factions must be 2 times the number of players",
   "player": "Player",
-  "customization_user": "Customize players"
+  "customization_user": "Customize players",
+  "something_went_wrong" : "Something went wrong!"
 }

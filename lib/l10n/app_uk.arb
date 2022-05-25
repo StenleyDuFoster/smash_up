@@ -9,8 +9,9 @@
   "select_dls": "Виберіть доповнення для фільтрації",
   "apply": "Підтвердити",
   "enter_player_count": "Введіть кількість гравців",
-  "select_fraction": "Виберіть фракцію",
+  "select_fraction": "Оберіть фракцію",
   "fraction_count_must_be_beggar": "Кількість фракцій повинна бути в 2 раза більною кількості гравців",
   "player": "Гравець",
-  "customization_user": "Налаштування гравців"
+  "customization_user": "Налаштування гравців",
+  "something_went_wrong" : "Трапилась халепа!"
 }

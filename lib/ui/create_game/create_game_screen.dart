@@ -31,9 +31,11 @@ class _CreateGameScreen extends BaseState<CreateGameScreen> {
         future: FractionLocalDb.instance().getPreviousSelectedFraction(),
         builder: (context, snapshot) {
           if (!snapshot.hasData && fraction.isEmpty) {
-            return Container(
-              child: Center(
-                child: CircularProgressIndicator.adaptive(),
+            return Scaffold(
+              body: Container(
+                child: Center(
+                  child: CircularProgressIndicator.adaptive(),
+                ),
               ),
             );
           }
