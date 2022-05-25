@@ -54,8 +54,10 @@ class _ViewFractionScreen extends BaseState<ViewFractionScreen> {
 
           return Scaffold(
             appBar: AppBar(
+              automaticallyImplyLeading: false,
                 title: Row(
                   children: [
+                    BackButton(),
                     Expanded(
                       child: Text(AppLocalizations.of(context)?.watch_fraction ?? ""),
                     ),

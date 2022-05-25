@@ -44,9 +44,6 @@ class ColorHelper {
   ];
 
   List<Color> generateRandomList(int size, List<Color> startList) {
-    if (size > _colors.length) {
-      throw Exception("size must be smaller then ${_colors.length}");
-    }
     List<Color> resultList = [];
     LinkedList<_ColorEntry> colorCopy = LinkedList();
     colorCopy.addAll(_colors.map((e) {
@@ -63,9 +60,14 @@ class ColorHelper {
     });
 
     for (int i = 0; i < size; i++) {
-      _ColorEntry randomColor = colorCopy.elementAt(Random.secure().nextInt(size-1));
-      resultList.add(randomColor.color);
-      colorCopy.remove(randomColor);
+      if (colorCopy.isNotEmpty) {
+          _ColorEntry randomColor = colorCopy.elementAt(
+              Random.secure().nextInt(colorCopy.length));
+          resultList.add(randomColor.color);
+          colorCopy.remove(randomColor);
+      } else {
+        resultList.add(Color.fromARGB(Random.secure().nextInt(255), Random.secure().nextInt(255), Random.secure().nextInt(255), Random.secure().nextInt(255)));
+      }
     }
 
     return resultList;

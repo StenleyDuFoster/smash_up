@@ -29,7 +29,7 @@ class _CreateGameScreen extends BaseState<CreateGameScreen> {
     return FutureBuilder(
         future: FractionLocalDb.instance().getPreviousSelectedFraction(),
         builder: (context, snapshot) {
-          if (!snapshot.hasData) {
+          if (!snapshot.hasData && fraction.isEmpty) {
             return Container(
               child: Center(
                 child: CircularProgressIndicator.adaptive(),
@@ -43,8 +43,10 @@ class _CreateGameScreen extends BaseState<CreateGameScreen> {
 
           return Scaffold(
             appBar: AppBar(
+              automaticallyImplyLeading: false,
               title: Row(
                 children: [
+                  BackButton(),
                   Expanded(
                       child: Text(
                           AppLocalizations.of(context)?.create_game ?? "")),
@@ -138,7 +140,9 @@ class _CreateGameScreen extends BaseState<CreateGameScreen> {
                                     players = newPlayer;
                                   },
                                   defaultPlayers: players,
-                                  title: Text(AppLocalizations.of(context)?.customization_user ?? ""),
+                                  title: Text(AppLocalizations.of(context)
+                                          ?.customization_user ??
+                                      ""),
                                 );
                               });
                         },
@@ -180,16 +184,18 @@ class _CreateGameScreen extends BaseState<CreateGameScreen> {
         });
   }
 
-  List<PlayerEntity> createDefaultList(BuildContext context, List<PlayerEntity> startList) {
+  List<PlayerEntity> createDefaultList(
+      BuildContext context, List<PlayerEntity> startList) {
     List<PlayerEntity> resultList = [];
     resultList.addAll(startList);
     int playerCount = int.parse(inputText);
-    List<Color> colorList = colorHelper.generateRandomList(playerCount, resultList.map((e) => e.color).toList());
+    List<Color> colorList = colorHelper.generateRandomList(
+        playerCount, resultList.map((e) => e.color).toList());
 
     if (resultList.length == playerCount) {
       return resultList;
     } else if (resultList.length > playerCount) {
-      while(resultList.length > playerCount) {
+      while (resultList.length > playerCount) {
         resultList.removeLast();
       }
       return resultList;

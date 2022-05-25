@@ -35,7 +35,7 @@ class _CreatedFractionScreen extends BaseState<CreatedFractionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar:
-          AppBar(title: Text(AppLocalizations.of(context)?.create_game ?? "")),
+          AppBar(title: Row(children: [BackButton(),Text(AppLocalizations.of(context)?.create_game ?? "")]), automaticallyImplyLeading: false,),
       body: ListView.builder(
         itemBuilder: (context, index) {
           if (index == 0) {
