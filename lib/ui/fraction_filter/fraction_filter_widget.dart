@@ -1,37 +1,14 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../domain/entity/fraction_entity.dart';
-import '../../domain/entity/set_enum.dart';
+import 'dls_dto.dart';
 
-class FractionFilterDialog extends AlertDialog {
-  List<FractionEntity> fraction;
-  List<FractionEntity> selectedFraction;
-  Function selectedDlsCallBack;
-  Widget title;
-
-  FractionFilterDialog(
-      {required this.fraction,
-      required this.selectedFraction,
-      required this.selectedDlsCallBack,
-      required this.title})
-      : super(
-            content: _FractionFilterWidget(
-                fraction.map((e) {
-                  return _DlsDto(
-                      dlsName: e.setName,
-                      dlsType: e.set,
-                      isSelected: selectedFraction.contains(e));
-                }).toList(),
-                selectedDlsCallBack),
-            title: title);
-}
-
-class _FractionFilterWidget extends StatefulWidget {
-  late List<_DlsDto> dls;
+class FractionFilterWidget extends StatefulWidget {
+  late List<DlsDto> dls;
   late Function selectedDlsCallBack;
 
-  _FractionFilterWidget(List<_DlsDto> dls, Function selectedDlsCallBack) {
+  FractionFilterWidget(List<DlsDto> dls, Function selectedDlsCallBack) {
     this.dls = removeDublicate(dls);
     this.selectedDlsCallBack = selectedDlsCallBack;
   }
@@ -39,16 +16,16 @@ class _FractionFilterWidget extends StatefulWidget {
   @override
   State createState() => _FractionFilterState();
 
-  List<_DlsDto> removeDublicate(List<_DlsDto> data) {
+  List<DlsDto> removeDublicate(List<DlsDto> data) {
     List<String> values = [];
-    List<_DlsDto> resultLis = [];
+    List<DlsDto> resultLis = [];
 
     data.forEach((element) {
       if (!values.contains(element.dlsName)) {
         resultLis.add(element);
         values.add(element.dlsName);
       } else {
-        _DlsDto currentData = resultLis.last;
+        DlsDto currentData = resultLis.last;
         if (!currentData.isSelected && element.isSelected) {
           currentData.isSelected = true;
         }
@@ -59,7 +36,7 @@ class _FractionFilterWidget extends StatefulWidget {
   }
 }
 
-class _FractionFilterState extends State<_FractionFilterWidget> {
+class _FractionFilterState extends State<FractionFilterWidget> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -102,8 +79,8 @@ class _FractionFilterState extends State<_FractionFilterWidget> {
     );
   }
 
-  List<_DlsDto> removeUnSelected(List<_DlsDto> data) {
-    List<_DlsDto> result = [];
+  List<DlsDto> removeUnSelected(List<DlsDto> data) {
+    List<DlsDto> result = [];
     data.forEach((element) {
       if (element.isSelected) {
         result.add(element);
@@ -111,13 +88,4 @@ class _FractionFilterState extends State<_FractionFilterWidget> {
     });
     return result;
   }
-}
-
-class _DlsDto {
-  String dlsName;
-  SetEnum dlsType;
-  bool isSelected;
-
-  _DlsDto(
-      {required this.dlsName, required this.dlsType, required this.isSelected});
 }

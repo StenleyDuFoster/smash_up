@@ -6,7 +6,7 @@ import '../../core/base_screen.dart';
 import '../../data/local/fraction_singletone.dart';
 import '../../domain/entity/fraction_entity.dart';
 import '../../domain/entity/set_enum.dart';
-import '../fraction_filter/FractionFilter.dart';
+import '../fraction_filter/fraction_filter.dart';
 import '../shared/fraction_item.dart';
 
 class ViewFractionScreen extends BaseScreen {
@@ -85,7 +85,7 @@ class _ViewFractionScreen extends BaseState<ViewFractionScreen> {
                   ],
                 )),
             body: Column(
-              children: [Expanded(child: _buildList()), _buildAddButton()],
+              children: [Expanded(child: _buildList()), /*_buildAddButton()*/],
             ),
           );
         }
@@ -108,34 +108,34 @@ class _ViewFractionScreen extends BaseState<ViewFractionScreen> {
     );
   }
 
-  Widget _buildAddButton() {
-    return Container(
-      width: double.infinity,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(10), topRight: Radius.circular(10)),
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 5,
-            blurRadius: 7,
-            offset: Offset(0, 3), // changes position of shadow
-          ),
-        ],
-      ),
-      child: TextButton(
-        style: ButtonStyle(),
-        child: Padding(
-          child: Text(AppLocalizations.of(context)?.add_fraction ?? ""),
-          padding: EdgeInsets.all(20),
-        ),
-        onPressed: () => {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text(AppLocalizations.of(context)?.in_develop ?? ""),
-          ))
-        },
-      ),
-    );
-  }
+  // Widget _buildAddButton() {
+  //   return Container(
+  //     width: double.infinity,
+  //     decoration: BoxDecoration(
+  //       borderRadius: BorderRadius.only(
+  //           topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+  //       color: Colors.white,
+  //       boxShadow: [
+  //         BoxShadow(
+  //           color: Colors.grey.withOpacity(0.5),
+  //           spreadRadius: 5,
+  //           blurRadius: 7,
+  //           offset: Offset(0, 3), // changes position of shadow
+  //         ),
+  //       ],
+  //     ),
+  //     child: TextButton(
+  //       style: ButtonStyle(),
+  //       child: Padding(
+  //         child: Text(AppLocalizations.of(context)?.add_fraction ?? ""),
+  //         padding: EdgeInsets.all(20),
+  //       ),
+  //       onPressed: () => {
+  //         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+  //           content: Text(AppLocalizations.of(context)?.in_develop ?? ""),
+  //         ))
+  //       },
+  //     ),
+  //   );
+  // }
 }

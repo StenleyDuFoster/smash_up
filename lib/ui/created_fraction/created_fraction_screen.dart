@@ -7,6 +7,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../core/base_screen.dart';
 import '../../domain/entity/fraction_entity.dart';
+import '../../domain/entity/player_with_fraction.dart';
 import '../../util/app_locale.dart';
 
 class CreatedFractionScreen extends BaseScreen {
@@ -21,7 +22,7 @@ class _CreatedFractionScreen extends BaseState<CreatedFractionScreen> {
   List<PlayerEntity> players;
   List<FractionEntity> fraction;
 
-  List<_UserWithFraction> data = [];
+  List<PlayerWithFraction> data = [];
 
   _CreatedFractionScreen({required this.fraction, required this.players});
 
@@ -34,8 +35,17 @@ class _CreatedFractionScreen extends BaseState<CreatedFractionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:
-          AppBar(title: Row(children: [BackButton(),Text(AppLocalizations.of(context)?.create_game ?? "")]), automaticallyImplyLeading: false,),
+      appBar: AppBar(
+        title: Row(children: [
+          BackButton(),
+          Expanded(child: Text(AppLocalizations.of(context)?.create_game ?? "")),
+          InkWell(
+            child: Icon(Icons.share),
+            onTap: () {},
+          )
+        ]),
+        automaticallyImplyLeading: false,
+      ),
       body: ListView.builder(
         itemBuilder: (context, index) {
           if (index == 0) {
@@ -43,96 +53,7 @@ class _CreatedFractionScreen extends BaseState<CreatedFractionScreen> {
           } else if (index == data.length + 1) {
             return SizedBox(height: 20, width: 20);
           } else {
-            _UserWithFraction item = data[index - 1];
-            return Container(
-              color: item.color,
-              padding: EdgeInsets.all(10),
-              child: Center(
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width / 2,
-                  child: Column(
-                    children: [
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Stack(children: [
-                              Text(item.name,
-                                  style: TextStyle(
-                                    foreground: Paint()
-                                      ..style = PaintingStyle.stroke
-                                      ..strokeWidth = 2
-                                      ..color = Colors.white,
-                                  )),
-                              Text(item.name)
-                            ])
-                          ]),
-                      Padding(
-                        padding: EdgeInsets.all(5),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Image.asset(
-                              item.firstFraction.getAssetImage(),
-                              width: 50,
-                              height: 50,
-                            ),
-                            SizedBox(height: 20, width: 20),
-                            Stack(
-                              children: [
-                                Text(
-                                  item.firstFraction.getLocalizedName(
-                                      AppLocale.instance.current),
-                                  style: TextStyle(
-                                    foreground: Paint()
-                                      ..style = PaintingStyle.stroke
-                                      ..strokeWidth = 2
-                                      ..color = Colors.white,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                                Text(item.firstFraction.getLocalizedName(
-                                    AppLocale.instance.current))
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(5),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Image.asset(
-                              item.secondFraction.getAssetImage(),
-                              width: 50,
-                              height: 50,
-                            ),
-                            SizedBox(height: 20, width: 20),
-                            Stack(
-                              children: [
-                                Text(
-                                  item.secondFraction.getLocalizedName(
-                                      AppLocale.instance.current),
-                                  style: TextStyle(
-                                    foreground: Paint()
-                                      ..style = PaintingStyle.stroke
-                                      ..strokeWidth = 2
-                                      ..color = Colors.white,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                                Text(item.secondFraction.getLocalizedName(
-                                    AppLocale.instance.current))
-                              ],
-                            )
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            );
+            return _createItem(context, index);
           }
         },
         itemCount: data.length + 2,
@@ -140,8 +61,8 @@ class _CreatedFractionScreen extends BaseState<CreatedFractionScreen> {
     );
   }
 
-  List<_UserWithFraction> createRandomList() {
-    List<_UserWithFraction> resultList = [];
+  List<PlayerWithFraction> createRandomList() {
+    List<PlayerWithFraction> resultList = [];
     LinkedList<FractionEntry> localFraction = LinkedList();
 
     localFraction.addAll(fraction.map((e) => FractionEntry.fromEntry(e)));
@@ -153,7 +74,7 @@ class _CreatedFractionScreen extends BaseState<CreatedFractionScreen> {
       FractionEntry secondFraction = getRandomFraction(localFraction);
       localFraction.remove(secondFraction);
 
-      resultList.add(_UserWithFraction(
+      resultList.add(PlayerWithFraction(
           name: players[index].name,
           color: players[index].color,
           firstFraction: FractionEntity.fromEntry(firstFraction),
@@ -168,25 +89,72 @@ class _CreatedFractionScreen extends BaseState<CreatedFractionScreen> {
     return data.elementAt(Random.secure().nextInt(data.length));
   }
 
-  Size _textSize(String text) {
-    final TextPainter textPainter = TextPainter(
-        text: TextSpan(text: text),
-        maxLines: 1,
-        textDirection: TextDirection.ltr)
-      ..layout(minWidth: 0, maxWidth: double.infinity);
-    return textPainter.size;
+  Widget _createItem(BuildContext context, int index) {
+    PlayerWithFraction item = data[index - 1];
+    return Container(
+      color: item.color,
+      padding: EdgeInsets.all(10),
+      child: Center(
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width / 2,
+          child: Column(
+            children: [
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Stack(children: [
+                      Text(item.name,
+                          style: TextStyle(
+                            foreground: Paint()
+                              ..style = PaintingStyle.stroke
+                              ..strokeWidth = 2
+                              ..color = Colors.white,
+                          )),
+                      Text(item.name)
+                    ])
+                  ]),
+              _createIconWithText(item, true),
+              _createIconWithText(item, false),
+            ],
+          ),
+        ),
+      ),
+    );
   }
-}
 
-class _UserWithFraction {
-  String name;
-  FractionEntity firstFraction;
-  FractionEntity secondFraction;
-  Color color;
+  Widget _createIconWithText(PlayerWithFraction item, bool isFirstFraction) {
+    FractionEntity fraction = (isFirstFraction ? item.firstFraction : item.secondFraction);
+    return Padding(
+      padding: EdgeInsets.all(5),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Image.asset(
+            fraction.getAssetImage(),
+            width: 50,
+            height: 50,
+          ),
+          SizedBox(height: 20, width: 20),
+          Stack(
+            children: [
+              Text(
+                fraction.getLocalizedName(
+                    AppLocale.instance.current),
+                style: TextStyle(
+                  foreground: Paint()
+                    ..style = PaintingStyle.stroke
+                    ..strokeWidth = 2
+                    ..color = Colors.white,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              Text(fraction.getLocalizedName(
+                  AppLocale.instance.current))
+            ],
+          )
+        ],
+      ),
+    );
+  }
 
-  _UserWithFraction(
-      {required this.name,
-      required this.secondFraction,
-      required this.firstFraction,
-      required this.color});
 }

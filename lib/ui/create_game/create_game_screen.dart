@@ -8,6 +8,7 @@ import '../../core/base_screen.dart';
 import '../../data/local/fraction_local_db.dart';
 import '../../domain/entity/fraction_entity.dart';
 import '../../navigation/nav_const.dart';
+import '../../util/custom_text_formatter.dart';
 import '../chose_fraction/chose_fraction_dialog.dart';
 import '../chose_user_settings/chose_user_settings_dialog.dart';
 
@@ -50,9 +51,6 @@ class _CreateGameScreen extends BaseState<CreateGameScreen> {
                   Expanded(
                       child: Text(
                           AppLocalizations.of(context)?.create_game ?? "")),
-                  // ElevatedButton.icon(onPressed: () {
-                  //
-                  // }, icon: Icons.share, label: null,)
                 ],
               ),
             ),
@@ -62,121 +60,17 @@ class _CreateGameScreen extends BaseState<CreateGameScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  TextField(
-                    onChanged: (text) {
-                      inputText = text;
-                      players = createDefaultList(context, players);
-                      _checkIsInputValid();
-                    },
-                    decoration: InputDecoration(
-                        labelText:
-                            AppLocalizations.of(context)?.enter_player_count ??
-                                ""),
-                    keyboardType: TextInputType.number,
-                    textAlign: TextAlign.center,
-                    inputFormatters: <TextInputFormatter>[
-                      FilteringTextInputFormatter.digitsOnly,
-                      _CustomRangeTextInputFormatter()
-                    ],
-                  ),
+                  _createTextInput(),
                   const SizedBox(
-                    width: 50,
-                    height: 50,
+                    height: 20,
                   ),
-                  Card(
-                    child: InkWell(
-                      child: Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: Center(
-                              child: Text(
-                                  "${AppLocalizations.of(context)?.select_fraction ?? ""}(${fraction.length})"))),
-                      onTap: () {
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return ChoseFractionDialog(
-                                selectedFractionCallback:
-                                    (List<FractionEntity> selectedFraction) {
-                                  fraction = selectedFraction;
-                                  setState(() {
-                                    _isInputValid = fraction.isNotEmpty &&
-                                        inputText.isNotEmpty;
-                                  });
-                                  _checkIsInputValid();
-                                },
-                                title: Text(AppLocalizations.of(context)
-                                        ?.select_fraction ??
-                                    ""),
-                                oldSelected: fraction,
-                              );
-                            });
-                      },
-                    ),
+                  _createSelectFractionCard(),
+                  const SizedBox(
+                    height: 20,
                   ),
-                  AnimatedOpacity(
-                    opacity: players.isNotEmpty ? 1 : 0,
-                    duration: Duration(milliseconds: 300),
-                    child: const SizedBox(
-                      width: 50,
-                      height: 50,
-                    ),
-                  ),
-                  AnimatedOpacity(
-                    opacity: players.isNotEmpty ? 1 : 0,
-                    duration: Duration(milliseconds: 300),
-                    child: Card(
-                      child: InkWell(
-                        child: Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: Center(
-                                child: Text(
-                                    "${AppLocalizations.of(context)?.customization_user ?? ""}"))),
-                        onTap: () {
-                          showDialog(
-                              context: context,
-                              builder: (context) {
-                                return ChoseUserSettingsDialog(
-                                  newUserData: (List<PlayerEntity> newPlayer) {
-                                    players = newPlayer;
-                                  },
-                                  defaultPlayers: players,
-                                  title: Text(AppLocalizations.of(context)
-                                          ?.customization_user ??
-                                      ""),
-                                );
-                              });
-                        },
-                      ),
-                    ),
-                  ),
+                  _createCustomizeUserCard(),
                   const Spacer(),
-                  AnimatedOpacity(
-                    duration: Duration(milliseconds: 300),
-                    opacity: _isInputValid ? 1 : 0,
-                    child: Card(
-                      child: InkWell(
-                        child: Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: Center(
-                                child: Text(
-                                    AppLocalizations.of(context)?.create_game ??
-                                        ""))),
-                        onTap: () {
-                          if (fraction.length < int.parse(inputText) * 2) {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text(AppLocalizations.of(context)
-                                      ?.fraction_count_must_be_beggar ??
-                                  ""),
-                            ));
-                          } else {
-                            Navigator.pushNamed(
-                                context, Screen.CreatedFraction.name,
-                                arguments: {players: fraction});
-                          }
-                        },
-                      ),
-                    ),
-                  ),
+                  _createFinishButton(),
                 ],
               ),
             ),
@@ -184,11 +78,122 @@ class _CreateGameScreen extends BaseState<CreateGameScreen> {
         });
   }
 
+  Widget _createTextInput() {
+    return TextField(
+      onChanged: (text) {
+        inputText = text;
+        players = createDefaultList(context, players);
+        _checkIsInputValid();
+      },
+      decoration: InputDecoration(
+          labelText: AppLocalizations.of(context)?.enter_player_count ?? ""),
+      keyboardType: TextInputType.number,
+      textAlign: TextAlign.center,
+      inputFormatters: <TextInputFormatter>[
+        FilteringTextInputFormatter.digitsOnly,
+        CustomRangeTextInputFormatter()
+      ],
+    );
+  }
+
+  Widget _createSelectFractionCard() {
+    return Card(
+      child: InkWell(
+        child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Center(
+                child: Text(
+                    "${AppLocalizations.of(context)?.select_fraction ?? ""}(${fraction.length})"))),
+        onTap: () {
+          showDialog(
+              context: context,
+              builder: (context) {
+                return ChoseFractionDialog(
+                  selectedFractionCallback:
+                      (List<FractionEntity> selectedFraction) {
+                    fraction = selectedFraction;
+                    setState(() {
+                      _isInputValid =
+                          fraction.isNotEmpty && inputText.isNotEmpty;
+                    });
+                    _checkIsInputValid();
+                  },
+                  title:
+                      Text(AppLocalizations.of(context)?.select_fraction ?? ""),
+                  oldSelected: fraction,
+                );
+              });
+        },
+      ),
+    );
+  }
+
+  Widget _createCustomizeUserCard() {
+    return AnimatedOpacity(
+      opacity: players.isNotEmpty ? 1 : 0,
+      duration: Duration(milliseconds: 300),
+      child: Card(
+        child: InkWell(
+          child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: Center(
+                  child: Text(
+                      "${AppLocalizations.of(context)?.customization_user ?? ""}"))),
+          onTap: () {
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return ChoseUserSettingsDialog(
+                    newUserData: (List<PlayerEntity> newPlayer) {
+                      players = newPlayer;
+                    },
+                    defaultPlayers: players,
+                    title: Text(
+                        AppLocalizations.of(context)?.customization_user ?? ""),
+                  );
+                });
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget _createFinishButton() {
+    return AnimatedOpacity(
+      duration: Duration(milliseconds: 300),
+      opacity: _isInputValid ? 1 : 0,
+      child: Card(
+        child: InkWell(
+          child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: Center(
+                  child:
+                      Text(AppLocalizations.of(context)?.create_game ?? ""))),
+          onTap: () {
+            if (fraction.length < int.parse(inputText) * 2) {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text(AppLocalizations.of(context)
+                        ?.fraction_count_must_be_beggar ??
+                    ""),
+              ));
+            } else {
+              Navigator.pushNamed(context, Screen.CreatedFraction.name,
+                  arguments: {players: fraction});
+            }
+          },
+        ),
+      ),
+    );
+  }
+
   List<PlayerEntity> createDefaultList(
       BuildContext context, List<PlayerEntity> startList) {
     List<PlayerEntity> resultList = [];
     resultList.addAll(startList);
-    int playerCount = int.parse(inputText);
+    int playerCount = 0;
+    try {
+      playerCount = int.parse(inputText);
+    } catch (e) {}
     List<Color> colorList = colorHelper.generateRandomList(
         playerCount, resultList.map((e) => e.color).toList());
 
@@ -221,23 +226,5 @@ class _CreateGameScreen extends BaseState<CreateGameScreen> {
         });
       }
     }
-  }
-}
-
-class _CustomRangeTextInputFormatter extends TextInputFormatter {
-  @override
-  TextEditingValue formatEditUpdate(
-    TextEditingValue oldValue,
-    TextEditingValue newValue,
-  ) {
-    if (newValue.text == '') {
-      return const TextEditingValue();
-    } else if (int.parse(newValue.text) < 1) {
-      return const TextEditingValue().copyWith(text: '1');
-    }
-
-    return int.parse(newValue.text) > 34
-        ? const TextEditingValue().copyWith(text: '34')
-        : newValue;
   }
 }
