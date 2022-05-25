@@ -1,9 +1,5 @@
-import 'dart:convert';
-
-import 'package:SmashUp/data/local/fraction_local_db.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../core/base_screen.dart';
@@ -34,7 +30,6 @@ class _ViewFractionScreen extends BaseState<ViewFractionScreen> {
       listData = parsedList;
       allFraction = parsedList;
     });
-
   }
 
   @override
@@ -42,7 +37,7 @@ class _ViewFractionScreen extends BaseState<ViewFractionScreen> {
     return FutureBuilder(
       future: Fraction.instance.getData(),
       builder: (context, snapshot) {
-        if (snapshot.data == null) {
+        if (snapshot.data == null && allFraction.isEmpty) {
           return Container(
             child: Center(
               child: CircularProgressIndicator.adaptive(),
@@ -54,12 +49,13 @@ class _ViewFractionScreen extends BaseState<ViewFractionScreen> {
 
           return Scaffold(
             appBar: AppBar(
-              automaticallyImplyLeading: false,
+                automaticallyImplyLeading: false,
                 title: Row(
                   children: [
                     BackButton(),
                     Expanded(
-                      child: Text(AppLocalizations.of(context)?.watch_fraction ?? ""),
+                      child: Text(
+                          AppLocalizations.of(context)?.watch_fraction ?? ""),
                     ),
                     ElevatedButton.icon(
                         onPressed: () {
@@ -67,15 +63,16 @@ class _ViewFractionScreen extends BaseState<ViewFractionScreen> {
                               context: context,
                               builder: (context) {
                                 return FractionFilterDialog(
-                                  title: Text(
-                                      AppLocalizations.of(context)?.select_dls ?? ""),
+                                  title: Text(AppLocalizations.of(context)
+                                          ?.select_dls ??
+                                      ""),
                                   fraction: allFraction,
                                   selectedFraction: listData,
                                   selectedDlsCallBack: (List<SetEnum> filters) {
                                     setState(() {
                                       listData = allFraction
-                                          .where(
-                                              (element) => filters.contains(element.set))
+                                          .where((element) =>
+                                              filters.contains(element.set))
                                           .toList();
                                     });
                                   },
@@ -83,7 +80,8 @@ class _ViewFractionScreen extends BaseState<ViewFractionScreen> {
                               });
                         },
                         icon: Icon(Icons.sort),
-                        label: Text(AppLocalizations.of(context)?.filter_by_dlc ?? ""))
+                        label: Text(
+                            AppLocalizations.of(context)?.filter_by_dlc ?? ""))
                   ],
                 )),
             body: Column(
